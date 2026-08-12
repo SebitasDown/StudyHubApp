@@ -1,0 +1,1848 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StudyHub — Preview de diseño (Dark Glass)</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23818CF8'/%3E%3Cstop offset='.55' stop-color='%236366F1'/%3E%3Cstop offset='1' stop-color='%234F46E5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23g)' d='M24 8L42 24L24 36L6 24ZM24 3.1L26.4 5.5L24 7.9L21.6 5.5ZM12 33h24a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-24a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2ZM35.6 26.8L38.2 28.4L43.8 42.8L41.2 44ZM42 39.8a2.6 2.6 0 1 0 0 5.2a2.6 2.6 0 1 0 0-5.2Z'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* StudyHub — Premium Dark Glassmorphism (tokens reales del frontend web) */
+    --bg-base:#0F172A; --bg-surface:#1E293B; --bg-surface-light:#334155; --bg-hover:#3B4A63;
+    --surface:rgba(30,41,59,.6);
+    --surface-strong:rgba(30,41,59,.85);
+    --surface2:rgba(30,41,59,.9);
+    --glass-border:rgba(148,163,184,.1);
+    --glass-shadow:0 8px 32px rgba(0,0,0,.3);
+    --primary:#6366F1; --primary-dark:#4F46E5; --primary-light:#818CF8;
+    --primary-grad:linear-gradient(135deg,#6366F1,#4F46E5);
+    --primary-glow:rgba(99,102,241,.3);
+    --primary-container:rgba(99,102,241,.15);
+    --on-primary-container:#818CF8;
+    --secondary:#10B981; --secondary-light:#34D399;
+    --accent:#F59E0B; --accent-light:#FBBF24; --accent-dark:#D97706;
+    --info:#3B82F6; --info-light:#93BBFD;
+    --danger:#F43F5E; --danger-light:#FB7185; --danger-dark:#E11D48;
+    --text:#F8FAFC; --muted:#94A3B8; --muted2:#64748B;
+    --outline:rgba(148,163,184,.12);
+    --border:rgba(148,163,184,.12);
+    --success:#10B981; --success-bg:rgba(16,185,129,.15);
+    --warning:#F59E0B; --warning-bg:rgba(245,158,11,.15);
+    --danger-bg:rgba(244,63,94,.15);
+    --inset:transparent;
+    --shadow:0 8px 32px rgba(0,0,0,.3);
+    --shadow-lg:0 16px 48px rgba(0,0,0,.45);
+    --bezel:#05070F;
+    --bg1:#0F172A; --bg2:#0F172A; --bg3:#0F172A;
+  }
+  [data-theme="light"]{
+    --bg-base:#EEF1FB; --bg-surface:#FFFFFF; --bg-surface-light:#F1F3F9; --bg-hover:#E6E9F2;
+    --surface:rgba(255,255,255,.7);
+    --surface-strong:rgba(255,255,255,.9);
+    --surface2:rgba(255,255,255,.55);
+    --glass-border:rgba(15,23,42,.08);
+    --glass-shadow:0 8px 32px rgba(15,23,42,.12);
+    --primary:#6366F1; --primary-dark:#4F46E5; --primary-light:#4F46E5;
+    --primary-grad:linear-gradient(135deg,#6366F1,#4F46E5);
+    --primary-glow:rgba(99,102,241,.25);
+    --primary-container:rgba(99,102,241,.12);
+    --on-primary-container:#4F46E5;
+    --secondary:#059669; --secondary-light:#059669;
+    --accent:#D97706; --accent-light:#B45309; --accent-dark:#B45309;
+    --info:#2563EB; --info-light:#1D4ED8;
+    --danger:#E11D48; --danger-light:#BE123C; --danger-dark:#BE123C;
+    --text:#0F172A; --muted:#64748B; --muted2:#94A3B8;
+    --outline:rgba(15,23,42,.12);
+    --border:rgba(15,23,42,.12);
+    --success:#059669; --success-bg:rgba(16,185,129,.14);
+    --warning:#D97706; --warning-bg:rgba(245,158,11,.14);
+    --danger-bg:rgba(244,63,94,.12);
+    --inset:rgba(255,255,255,.65);
+    --shadow:0 8px 32px rgba(15,23,42,.1);
+    --shadow-lg:0 16px 48px rgba(15,23,42,.16);
+    --bezel:#0E0D1A;
+    --bg1:#E9EDFA; --bg2:#F0EAFB; --bg3:#E9F0FB;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    background:radial-gradient(1200px 800px at 15% -10%, rgba(99,102,241,.14), transparent 60%),
+               radial-gradient(1000px 700px at 110% 110%, rgba(139,92,246,.12), transparent 55%), #0B1220;
+    color:var(--text);
+    min-height:100vh;
+    display:flex;align-items:center;justify-content:center;
+    padding:32px 16px;
+    transition:background .3s;
+  }
+  [data-theme="light"] body{background:radial-gradient(1200px 800px at 15% -10%, rgba(99,102,241,.14), transparent 60%),
+               radial-gradient(1000px 700px at 110% 110%, rgba(139,92,246,.12), transparent 55%), #E9EDFA}
+  .stage{position:relative}
+  .phone{
+    width:400px;height:840px;max-height:92vh;
+    background:var(--bezel);
+    border-radius:54px;padding:12px;
+    box-shadow:0 40px 90px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.06) inset;
+  }
+  .screen{
+    position:relative;width:100%;height:100%;
+    background:linear-gradient(160deg,var(--bg1),var(--bg2) 52%,var(--bg3));
+    border-radius:44px;overflow:hidden;
+    display:flex;flex-direction:column;
+    transition:background .3s;
+  }
+  /* glass blobs behind everything */
+  .screen::before,.screen::after{
+    content:"";position:absolute;border-radius:50%;filter:blur(58px);pointer-events:none;z-index:0;
+  }
+  .screen::before{width:300px;height:300px;background:radial-gradient(circle,rgba(99,102,241,.22),transparent 70%);top:-90px;right:-90px}
+  .screen::after{width:280px;height:280px;background:radial-gradient(circle,rgba(139,92,246,.16),transparent 70%);bottom:50px;left:-100px}
+  .blob3{
+    position:absolute;width:250px;height:250px;border-radius:50%;z-index:0;pointer-events:none;
+    background:radial-gradient(circle,rgba(16,185,129,.12),transparent 70%);filter:blur(55px);
+    top:42%;right:-80px;
+  }
+  .notch{
+    position:absolute;top:10px;left:50%;transform:translateX(-50%);
+    width:118px;height:30px;background:var(--bezel);border-radius:20px;z-index:50;
+  }
+  .topbar{
+    position:relative;z-index:5;padding:48px 22px 14px;
+  }
+  .greet{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .greet h1{font-size:22px;font-weight:800;letter-spacing:-.3px}
+  .greet p{font-size:13px;color:var(--muted);margin-top:2px}
+  .avatar{
+    width:46px;height:46px;border-radius:50%;flex:none;position:relative;
+    background:linear-gradient(135deg,rgba(255,255,255,.6),rgba(255,255,255,.25));
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border:1px solid var(--glass-border);
+    color:var(--on-primary-container);font-weight:800;font-size:16px;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:inset 0 1px 0 var(--inset), var(--shadow);
+  }
+  .avatar::before{
+    content:"";position:absolute;inset:-1px;border-radius:50%;z-index:-1;
+    background:linear-gradient(135deg,#6366F1,#4F46E5);opacity:1;
+  }
+  .avatar span{color:#fff}
+  .scroll{
+    position:relative;z-index:5;flex:1;overflow-y:auto;padding:4px 22px 104px;scrollbar-width:none;
+  }
+  .scroll::-webkit-scrollbar{display:none}
+  .viewhead{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+  .backbtn{
+    width:36px;height:36px;border-radius:14px;border:1px solid var(--glass-border);
+    background:var(--surface);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text);flex:none;
+    box-shadow:inset 0 1px 0 var(--inset), var(--shadow);
+  }
+  .backbtn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+  .viewhead h1{font-size:20px;font-weight:800;letter-spacing:-.3px}
+  .viewhead .spacer{margin-left:auto}
+  /* glass cards */
+  .card{
+    background:var(--surface);
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    border:1px solid var(--glass-border);border-radius:20px;
+    padding:16px;margin-top:14px;
+    box-shadow:var(--glass-shadow);
+  }
+  .card h2{font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px}
+  .card h2 .link{margin-left:auto;font-size:12px;color:var(--primary);font-weight:600;cursor:pointer}
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+  .stat{
+    background:var(--surface);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    border:1px solid var(--glass-border);border-radius:16px;
+    padding:16px;box-shadow:var(--glass-shadow);
+    display:grid;grid-template-columns:44px 1fr;grid-template-rows:auto auto;column-gap:13px;row-gap:2px;align-items:center;
+  }
+  .stat .ico{
+    grid-row:1/3;width:44px;height:44px;border-radius:12px;
+    display:flex;align-items:center;justify-content:center;font-size:20px;
+  }
+  .stat .val{font-size:22px;font-weight:800;letter-spacing:-.4px;line-height:1.1}
+  .stat .lbl{font-size:12px;color:var(--muted)}
+  .stat:nth-child(1) .ico{background:rgba(99,102,241,.1);color:var(--primary-light)}
+  .stat:nth-child(2) .ico{background:rgba(245,158,11,.1);color:var(--accent-light)}
+  .stat:nth-child(3) .ico{background:rgba(16,185,129,.1);color:var(--secondary-light)}
+  .stat:nth-child(4) .ico{background:rgba(59,130,246,.1);color:var(--info-light)}
+  .stat.hl{background:var(--surface)}
+  .stat.hl .val,.stat.hl .lbl{color:inherit}
+  /* quick access */
+  .quick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+  .qtile{
+    display:flex;align-items:center;gap:11px;
+    background:var(--surface);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);
+    border:1px solid var(--glass-border);border-radius:20px;
+    padding:13px 14px;cursor:pointer;transition:transform .12s;
+    box-shadow:inset 0 1px 0 var(--inset), var(--shadow);
+  }
+  .qtile:active{transform:scale(.97)}
+  .qtile .qico{
+    width:38px;height:38px;border-radius:13px;flex:none;
+    display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff;
+    box-shadow:0 8px 18px rgba(0,0,0,.15);
+  }
+  .qtile b{font-size:13px;display:block}
+  .qtile span{font-size:10.5px;color:var(--muted)}
+  /* next class */
+  .nextclass{display:flex;align-items:center;gap:14px;margin-top:12px}
+  .chip{
+    width:52px;height:52px;border-radius:17px;flex:none;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    font-weight:800;color:#fff;font-size:15px;line-height:1.1;
+    box-shadow:0 10px 22px rgba(0,0,0,.18);
+  }
+  .chip small{font-size:9px;font-weight:600;opacity:.9}
+  .nextclass .meta b{font-size:14px}
+  .nextclass .meta span{font-size:12px;color:var(--muted);display:block;margin-top:2px}
+  .pill{
+    display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;
+    padding:3px 10px;border-radius:999px;white-space:nowrap;
+  }
+  .pill.primary{background:rgba(99,102,241,.15);color:var(--primary-light)}
+  .pill.warn{background:rgba(245,158,11,.15);color:var(--accent-light)}
+  .pill.ok{background:rgba(16,185,129,.15);color:var(--secondary-light)}
+  .pill.danger{background:rgba(244,63,94,.15);color:var(--danger-light)}
+  .pill.soft{background:rgba(148,163,184,.12);color:var(--muted)}
+  .streak{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:8px 16px;border-radius:999px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+    color:#fff;font-weight:700;font-size:13px;
+    box-shadow:0 4px 12px rgba(245,158,11,.3);
+  }
+  /* tasks */
+  .task{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--glass-border)}
+  .task:last-child{border-bottom:none}
+  .check{
+    width:22px;height:22px;border-radius:8px;border:1.5px solid var(--muted2);flex:none;
+    background:var(--surface);cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;
+  }
+  .check svg{width:12px;height:12px;stroke:#fff;stroke-width:3;fill:none;opacity:0}
+  .task.done .check{background:var(--success);border-color:var(--success)}
+  .task.done .check svg{opacity:1}
+  .task.done .tname{text-decoration:line-through;color:var(--muted)}
+  .tname{font-size:13.5px;font-weight:600;flex:1}
+  .tsub{font-size:11.5px;color:var(--muted);margin-top:1px}
+  .due{font-size:11px;font-weight:700;color:var(--muted);flex:none}
+  .due.soon{color:var(--danger)}
+  /* risk meter */
+  .meter{display:flex;align-items:center;gap:14px;margin-top:12px}
+  .ring{width:64px;height:64px;flex:none;position:relative}
+  .ring svg{transform:rotate(-90deg)}
+  .ring .rval{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px}
+  .ring.big{width:104px;height:104px}
+  .ring.big .rval{font-size:25px}
+  .riskinfo b{font-size:13.5px}
+  .riskinfo p{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.4}
+  .risklink{margin-top:10px;display:block;font-size:12.5px;font-weight:700;color:var(--primary)}
+  .riskcenter{display:flex;align-items:center;gap:18px;margin-top:14px}
+  .riskcenter h3{font-size:16px}
+  .riskcenter p{font-size:12px;color:var(--muted);line-height:1.45;margin-top:3px}
+  /* buttons */
+  .btn{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    border:none;border-radius:16px;padding:12px 16px;font-size:13.5px;font-weight:700;
+    font-family:inherit;cursor:pointer;transition:transform .12s, opacity .15s;
+  }
+  .btn:active{transform:scale(.97)}
+  .btn.primary{
+    background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;
+    box-shadow:0 4px 14px var(--primary-glow);
+  }
+  .btn.ghost{
+    background:var(--bg-surface-light);color:var(--text);border:1px solid var(--border);
+  }
+  .btn.full{width:100%;margin-top:14px}
+  /* subjects */
+  .subjects{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+  .subject{
+    background:var(--surface);backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);
+    border:1px solid var(--glass-border);border-radius:22px;padding:14px;cursor:pointer;transition:transform .12s;
+    box-shadow:inset 0 1px 0 var(--inset), var(--shadow);
+  }
+  .subject:active{transform:scale(.97)}
+  .subject .bar{height:5px;border-radius:3px;margin-bottom:12px}
+  .subject h3{font-size:14px;font-weight:700;line-height:1.25}
+  .subject .code{font-size:11px;color:var(--muted);margin-top:2px}
+  .subject .foot{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+  .subject .foot span{font-size:11.5px;color:var(--muted);font-weight:600}
+  .subject .mini{
+    width:30px;height:30px;border-radius:11px;display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:800;color:#fff;box-shadow:0 8px 16px rgba(0,0,0,.15);
+  }
+  /* chat */
+  .teacher{
+    display:flex;align-items:center;gap:12px;padding:14px;
+    background:linear-gradient(135deg,rgba(91,103,241,.85),rgba(139,92,246,.85));
+    backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,.3);border-radius:22px;color:#fff;
+    margin-top:14px;box-shadow:0 18px 40px rgba(91,103,241,.35);
+  }
+  .teacher .tava{
+    width:44px;height:44px;border-radius:15px;background:rgba(255,255,255,.2);
+    display:flex;align-items:center;justify-content:center;font-size:22px;flex:none;
+  }
+  .teacher b{font-size:14.5px}
+  .teacher span{font-size:12px;opacity:.85;display:block;margin-top:1px}
+  .teacher .status{margin-left:auto;font-size:11px;font-weight:700;background:rgba(255,255,255,.22);padding:4px 10px;border-radius:999px}
+  .chips{display:flex;gap:8px;margin-top:14px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chipq,.langchip{
+    flex:none;font-size:12px;font-weight:600;padding:8px 14px;border-radius:999px;cursor:pointer;
+    background:var(--surface);border:1px solid var(--glass-border);color:var(--text);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:all .15s;
+  }
+  .chipq:hover,.langchip:hover{background:var(--primary-container);color:var(--on-primary-container)}
+  .langchip.active{background:var(--primary-grad);color:#fff;border-color:transparent;box-shadow:0 8px 18px rgba(91,103,241,.35)}
+  .chat{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+  .msg{max-width:82%;padding:11px 14px;font-size:13px;line-height:1.5;border-radius:18px}
+  .msg.ai{
+    align-self:flex-start;background:var(--surface);border:1px solid var(--glass-border);
+    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    border-bottom-left-radius:6px;
+  }
+  .msg.me{
+    align-self:flex-end;background:var(--primary-grad);color:#fff;
+    border-bottom-right-radius:6px;box-shadow:0 10px 24px rgba(91,103,241,.3);
+  }
+  .msg .tag{font-size:10px;font-weight:700;opacity:.7;display:block;margin-bottom:3px}
+  .chatinput{display:flex;gap:10px;margin-top:14px}
+  .chatinput input{
+    flex:1;background:var(--surface);border:1px solid var(--glass-border);border-radius:999px;
+    padding:12px 18px;font-size:13.5px;color:var(--text);outline:none;font-family:inherit;
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  }
+  .chatinput input:focus{border-color:var(--primary)}
+  .send{
+    width:46px;height:46px;border-radius:50%;border:none;background:var(--primary-grad);color:#fff;
+    display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;
+    box-shadow:0 10px 22px rgba(91,103,241,.4);
+  }
+  .send svg{width:18px;height:18px}
+  /* cv */
+  .cvpreview{
+    background:var(--surface);backdrop-filter:blur(22px) saturate(1.5);-webkit-backdrop-filter:blur(22px) saturate(1.5);
+    border:1px solid var(--glass-border);border-radius:24px;padding:18px;
+    margin-top:14px;box-shadow:inset 0 1px 0 var(--inset), var(--shadow);position:relative;
+  }
+  .cvpreview .cvname{font-size:19px;font-weight:800;letter-spacing:-.3px}
+  .cvpreview .cvtitle{font-size:13px;color:var(--primary);font-weight:700;margin-top:2px}
+  .cvpreview .cvsum{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.55}
+  .cvsec{margin-top:14px}
+  .cvsec h4{font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;gap:6px}
+  .cvitem{display:flex;gap:10px;padding:9px 0;border-bottom:1px dashed var(--glass-border);align-items:flex-start}
+  .cvitem:last-child{border-bottom:none}
+  .cvitem .dotico{
+    width:28px;height:28px;border-radius:10px;flex:none;background:var(--surface2);
+    border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;font-size:13px;margin-top:1px;
+  }
+  .cvitem b{font-size:13px;display:block}
+  .cvitem span{font-size:11.5px;color:var(--muted)}
+  .addrow{
+    display:flex;align-items:center;justify-content:center;gap:6px;margin-top:10px;
+    font-size:12.5px;font-weight:700;color:var(--primary);cursor:pointer;padding:8px;
+    border:1.5px dashed var(--primary);border-radius:14px;opacity:.85;
+  }
+  .addrow:hover{opacity:1}
+  .progress{height:8px;border-radius:99px;background:var(--surface2);overflow:hidden;margin-top:8px;border:1px solid var(--glass-border)}
+  .progress i{display:block;height:100%;border-radius:99px;background:var(--primary-grad)}
+  /* lab */
+  .codecard{
+    background:rgba(14,17,36,.9);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:14px;margin-top:12px;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;line-height:1.75;
+    color:#C7CCF5;overflow-x:auto;
+  }
+  .codecard .ln{color:#5A5F8E;user-select:none}
+  .kw{color:#C792EA}.fn{color:#82AAFF}.num{color:#F78C6C}.str{color:#C3E88D}.com{color:#55608A}
+  .runrow{display:flex;align-items:center;gap:10px;margin-top:12px}
+  .runbtn{
+    border:none;border-radius:13px;padding:10px 20px;font-size:12.5px;font-weight:800;cursor:pointer;
+    background:var(--primary-grad);color:#fff;font-family:inherit;display:flex;align-items:center;gap:6px;
+    box-shadow:0 10px 22px rgba(91,103,241,.35);
+  }
+  .runbtn svg{width:13px;height:13px;fill:currentColor}
+  .output{flex:1;font-size:12px;font-weight:700;border-radius:12px;padding:10px 14px;display:none}
+  .output.ok{display:block;background:var(--success-bg);color:var(--success)}
+  .exer{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--glass-border)}
+  .exer:last-child{border-bottom:none}
+  .exer .xbar{width:40px;height:40px;border-radius:13px;flex:none;display:flex;align-items:center;justify-content:center;font-size:16px}
+  .exer b{font-size:13.5px;display:block}
+  .exer .xtag{font-size:11px;color:var(--muted);margin-top:1px}
+  .exer .xstat{margin-left:auto;font-size:11px;font-weight:800;flex:none}
+  /* sessions (lab history) */
+  .session{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--glass-border)}
+  .session:last-child{border-bottom:none}
+  .sdate{
+    width:46px;height:46px;border-radius:15px;flex:none;background:var(--primary-container);
+    color:var(--on-primary-container);display:flex;flex-direction:column;align-items:center;justify-content:center;
+    font-weight:800;font-size:12px;line-height:1.15;
+  }
+  .sdate small{font-size:9px;font-weight:700;opacity:.75}
+  .session b{font-size:13px}
+  .session span{font-size:11.5px;color:var(--muted);display:block;margin-top:1px}
+  /* risk view */
+  .frow{display:flex;align-items:center;gap:10px;margin-top:11px;font-size:12px}
+  .frow .fname{width:150px;color:var(--muted);font-weight:600;flex:none}
+  .frow .fbar{flex:1;height:8px;border-radius:99px;background:var(--surface2);overflow:hidden;border:1px solid var(--glass-border)}
+  .frow .fbar i{display:block;height:100%;border-radius:99px;background:var(--primary-grad)}
+  .frow .fpct{width:36px;text-align:right;font-weight:800;flex:none}
+  .hbars{display:flex;align-items:flex-end;gap:8px;height:90px;margin-top:14px}
+  .hbar{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px}
+  .hbar .col{width:100%;border-radius:8px 8px 3px 3px;background:rgba(99,102,241,.35)}
+  .hbar .col.hi{background:var(--accent)}
+  .hbar span{font-size:9.5px;color:var(--muted);font-weight:700}
+  /* schedule */
+  .day{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--glass-border)}
+  .day:last-child{border-bottom:none}
+  .day .dname{width:64px;flex:none;font-weight:800;font-size:12px}
+  .day .dchip{flex:1;border-radius:15px;padding:9px 12px;color:#fff;font-size:12px;font-weight:600;line-height:1.3;box-shadow:0 8px 18px rgba(0,0,0,.12)}
+  .day .dchip small{display:block;font-size:10.5px;opacity:.85;font-weight:600;margin-top:2px}
+  /* profile */
+  .cover{height:110px;border-radius:24px;margin-top:14px;position:relative;overflow:hidden;
+    background:linear-gradient(135deg,#5B67F1 0%,#8B5CF6 55%,#D946EF 100%);
+    box-shadow:0 16px 36px rgba(91,103,241,.35)}
+  .cover .pava{
+    position:absolute;bottom:-22px;left:18px;width:66px;height:66px;border-radius:50%;
+    border:4px solid rgba(255,255,255,.7);background:linear-gradient(135deg,#F59E0B,#F97316);
+    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:24px;
+  }
+  .profile-head{padding-top:34px}
+  .profile-head h3{font-size:18px;font-weight:800}
+  .profile-head p{font-size:12.5px;color:var(--muted);margin-top:2px}
+  .profile-head .badges{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+  .kv{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
+  .kv .item{
+    background:var(--surface);border:1px solid var(--glass-border);border-radius:16px;padding:10px 12px;
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  }
+  .kv .item small{font-size:10.5px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+  .kv .item b{font-size:13px;display:block;margin-top:2px}
+  .skills{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .skill{
+    display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;
+    background:var(--surface);border:1px solid var(--glass-border);padding:6px 12px;border-radius:999px;
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  }
+  .skill .lvl{font-size:10px;font-weight:800;color:var(--primary)}
+  .roadmap{margin-top:12px}
+  .step{display:flex;gap:12px;position:relative;padding-bottom:16px}
+  .step:last-child{padding-bottom:0}
+  .step::before{content:"";position:absolute;left:13px;top:28px;bottom:2px;width:2px;background:var(--glass-border)}
+  .step:last-child::before{display:none}
+  .step .dot{
+    width:28px;height:28px;border-radius:50%;flex:none;z-index:1;
+    display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;
+    background:var(--surface);border:2px solid var(--glass-border);color:var(--muted);
+  }
+  .step.done .dot{background:var(--success);border-color:var(--success);color:#fff}
+  .step.cur .dot{background:var(--primary-grad);border-color:transparent;color:#fff;box-shadow:0 8px 16px rgba(91,103,241,.4)}
+  .step b{font-size:13px;display:block;padding-top:3px}
+  .step span{font-size:11.5px;color:var(--muted)}
+  .navrow{
+    display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--glass-border);
+    border-radius:18px;background:var(--surface);cursor:pointer;margin-top:12px;
+    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    box-shadow:inset 0 1px 0 var(--inset), var(--shadow);
+  }
+  .navrow:active{transform:scale(.99)}
+  .navrow .nico{width:38px;height:38px;border-radius:13px;flex:none;display:flex;align-items:center;justify-content:center;font-size:17px;color:#fff}
+  .navrow b{font-size:13.5px;display:block}
+  .navrow span{font-size:11.5px;color:var(--muted)}
+  .navrow .arrow{margin-left:auto;color:var(--muted);font-size:16px;font-weight:800}
+  .achv{display:flex;gap:12px;margin-top:12px}
+  .achv > div{
+    text-align:center;flex:1;background:var(--surface);border:1px solid var(--glass-border);
+    border-radius:18px;padding:12px 6px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  }
+  .achv b{font-size:11.5px}
+  /* achievements */
+  .achgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+  .ach{
+    background:var(--surface);border:1px solid var(--glass-border);border-radius:18px;padding:12px 6px;
+    text-align:center;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  }
+  .ach .aico{font-size:22px}
+  .ach b{font-size:10.5px;display:block;margin-top:5px;line-height:1.3}
+  .ach .apct{font-size:9.5px;color:var(--muted);font-weight:700;margin-top:3px}
+  .ach.locked{opacity:.55;filter:grayscale(.9)}
+  /* quiz */
+  .qopt{
+    text-align:left;font-size:13px;font-weight:600;line-height:1.4;
+    padding:13px 15px;border-radius:15px;cursor:pointer;font-family:inherit;
+    background:var(--surface);border:1px solid var(--glass-border);color:var(--text);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:all .15s;
+  }
+  .qopt:not(:disabled):hover{background:var(--primary-container)}
+  .qopt:disabled{cursor:default}
+  .qopt.correct{background:var(--success-bg);border-color:var(--success);color:var(--success)}
+  .qopt.wrong{background:var(--danger-bg);border-color:var(--danger);color:var(--danger)}
+  .stepper{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--glass-border);border-radius:999px;padding:6px 8px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+  .stepper button{
+    width:30px;height:30px;border-radius:50%;border:none;cursor:pointer;font-size:16px;font-weight:800;
+    background:var(--surface2);color:var(--text);font-family:inherit;
+  }
+  .stepper b{font-size:14px;min-width:18px;text-align:center}
+  /* bell + fields + notifications */
+  .bell{
+    position:relative;width:42px;height:42px;border-radius:50%;border:1px solid var(--glass-border);
+    background:var(--surface);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;
+    box-shadow:inset 0 1px 0 var(--inset),var(--shadow);
+  }
+  .bell svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .bdot{position:absolute;top:1px;right:1px;min-width:17px;height:17px;border-radius:999px;background:var(--danger);color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;padding:0 4px;border:2px solid var(--bg-base)}
+  .gfield{
+    background:var(--surface);border:1px solid var(--glass-border);border-radius:14px;padding:12px 14px;
+    font-size:13.5px;color:var(--text);outline:none;font-family:inherit;
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  }
+  .gfield::placeholder{color:var(--muted)}
+  .gfield:focus{border-color:var(--primary)}
+  .notif{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--glass-border);align-items:flex-start}
+  .notif:last-child{border-bottom:none}
+  .notif .nico{width:38px;height:38px;border-radius:13px;flex:none;background:var(--surface2);border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;font-size:16px}
+  .notif b{font-size:13px;display:block}
+  .notif .nmsg{font-size:11.5px;color:var(--muted);margin-top:2px;line-height:1.4}
+  .notif .ntime{font-size:10.5px;color:var(--muted);margin-top:4px;font-weight:600}
+  .notif .nunread{width:9px;height:9px;border-radius:50%;background:var(--primary-light);flex:none;margin-top:5px}
+  .notif.read .nunread{background:transparent;border:1px solid var(--outline)}
+  .markbtn{
+    border:1px solid var(--glass-border);background:var(--surface2);color:var(--muted);
+    border-radius:999px;padding:4px 11px;font-size:10.5px;font-weight:700;cursor:pointer;font-family:inherit;flex:none;margin-top:2px;
+  }
+  .markbtn:hover{color:var(--primary);border-color:var(--primary)}
+  /* tabs */
+  .tab{display:none}
+  .tab.active{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  /* bottom nav — floating glass pill */
+  .bottomnav{
+    position:absolute;left:16px;right:16px;bottom:14px;z-index:40;
+    background:var(--surface-strong);
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    border:1px solid var(--glass-border);border-radius:28px;
+    box-shadow:var(--glass-shadow);
+    display:flex;padding:8px;justify-content:space-around;
+  }
+  .navbtn{
+    flex:1;background:none;border:none;cursor:pointer;color:var(--muted);
+    display:flex;flex-direction:column;align-items:center;gap:2px;
+    font-size:9.5px;font-weight:600;font-family:inherit;padding:2px 0;transition:color .15s;
+  }
+  .navbtn .wrap{
+    position:relative;width:46px;height:32px;border-radius:16px;
+    display:flex;align-items:center;justify-content:center;transition:all .22s;
+  }
+  .navbtn svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .navbtn.active{color:var(--primary)}
+  .navbtn.active .wrap{background:var(--primary-grad);color:#fff;box-shadow:0 10px 22px rgba(91,103,241,.45)}
+  .navbtn .dot{
+    position:absolute;top:1px;right:6px;width:7px;height:7px;border-radius:50%;
+    background:var(--danger);display:none;
+  }
+  .navbtn.hasnews .dot{display:block}
+  .theme-toggle{
+    position:absolute;top:38px;right:-14px;z-index:60;
+    width:44px;height:44px;border-radius:50%;border:1px solid var(--glass-border);
+    background:var(--surface);color:var(--text);cursor:pointer;
+    display:flex;align-items:center;justify-content:center;font-size:18px;
+    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    box-shadow:inset 0 1px 0 var(--inset), var(--shadow-lg);transition:transform .15s;
+  }
+  .theme-toggle:active{transform:scale(.92)}
+  .caption{text-align:center;margin-top:18px;font-size:12px;color:var(--muted);max-width:420px;line-height:1.6}
+  .caption b{color:var(--primary)}
+  /* ================= LOGIN (dark glass, igual que el frontend web) ================= */
+  .screen.login .topbar{display:none}
+  .screen.login .bottomnav{display:none}
+  .loginview{
+    position:absolute;inset:0;z-index:30;overflow-y:auto;
+    background:var(--bg-base);
+    color:var(--text);display:none;flex-direction:column;justify-content:center;padding:36px 26px;
+  }
+  .loginview.active{display:flex;animation:fade .3s ease}
+  .loginview::before,.loginview::after{
+    content:"";position:absolute;border-radius:50%;filter:blur(140px);pointer-events:none;
+  }
+  .loginview::before{width:420px;height:420px;background:var(--primary);opacity:.15;top:-120px;right:-100px}
+  .loginview::after{width:380px;height:380px;background:var(--secondary);opacity:.12;bottom:-140px;left:-110px}
+  .login-inner{position:relative;z-index:2;display:flex;flex-direction:column}
+  .login-brand{display:flex;flex-direction:column;align-items:center;text-align:center}
+  .login-logo{
+    width:84px;height:84px;border-radius:28px;
+    background:linear-gradient(135deg,var(--primary-light),var(--primary));
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 12px 32px rgba(99,102,241,.35);
+  }
+  .login-logo svg{width:46px;height:46px;display:block;}
+  .login-brand h1{font-size:30px;font-weight:800;letter-spacing:-.6px;margin-top:16px;color:var(--text)}
+  .login-brand p{font-size:13.5px;color:var(--muted);margin-top:6px;line-height:1.5;max-width:280px}
+  .glass-form{
+    margin-top:26px;padding:24px 22px 22px;border-radius:24px;
+    background:var(--surface);
+    border:1px solid var(--glass-border);
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    box-shadow:var(--glass-shadow);
+  }
+  .seg{display:flex;background:rgba(148,163,184,.1);border:1px solid var(--glass-border);border-radius:999px;padding:4px;margin-bottom:16px}
+  .seg button{
+    flex:1;border:none;background:transparent;color:var(--muted);font-weight:700;font-size:13px;
+    padding:9px;border-radius:999px;cursor:pointer;font-family:inherit;transition:all .2s;
+  }
+  .seg button.on{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;box-shadow:0 4px 14px var(--primary-glow)}
+  .authform{display:flex;flex-direction:column;gap:11px}
+  .field{
+    background:var(--bg-surface);border:1px solid var(--border);border-radius:12px;
+    padding:14px 16px;font-size:14px;color:var(--text);outline:none;font-family:inherit;transition:all .15s;
+  }
+  .field::placeholder{color:var(--muted2)}
+  .field:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(99,102,241,.15)}
+  .btnlogin{
+    border:none;border-radius:12px;padding:15px;font-size:15px;font-weight:700;cursor:pointer;
+    background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;font-family:inherit;margin-top:4px;
+    box-shadow:0 4px 14px var(--primary-glow);
+  }
+  .btnlogin:active{transform:scale(.98)}
+  .btngoogle{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    border:1px solid var(--border);border-radius:12px;padding:14px;font-size:14px;font-weight:600;
+    color:var(--text);background:var(--bg-surface-light);cursor:pointer;font-family:inherit;transition:background .15s;
+  }
+  .btngoogle:hover{background:var(--bg-hover)}
+  .glogo{width:18px;height:18px}
+  .authlink{text-align:center;font-size:13px;margin-top:16px;color:var(--muted)}
+  .authlink u{text-decoration:underline;cursor:pointer;font-weight:700;color:var(--primary-light)}
+  .demobtn{
+    margin-top:16px;border:1.5px dashed rgba(148,163,184,.35);border-radius:14px;padding:13px;
+    text-align:center;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted);transition:background .15s;
+  }
+  .demobtn:hover{background:rgba(255,255,255,.05);color:var(--text)}
+  .authfoot{margin-top:18px;text-align:center;font-size:11px;color:var(--muted2);line-height:1.6}
+</style>
+</head>
+<body data-theme="dark">
+<div class="stage">
+  <div class="phone">
+    <div class="screen">
+      <div class="notch"></div>
+      <div class="blob3"></div>
+
+      <!-- ============ INICIO ============ -->
+      <header class="topbar">
+        <div class="greet">
+          <div>
+            <p>Este es tu resumen académico de hoy.</p>
+            <h1>¡Hola, Juan! 👋</h1>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <button class="bell" onclick="openView('notifications')" title="Notificaciones">
+              <svg viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+              <span class="bdot">3</span>
+            </button>
+            <div class="avatar"><span>JP</span></div>
+          </div>
+        </div>
+      </header>
+
+      <div class="scroll">
+        <section id="tab-home" class="tab active">
+          <div style="display:flex;align-items:center;gap:8px;margin-top:14px">
+            <span class="streak">🔥 12 días de racha</span>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px">
+            <div class="stat"><div class="ico">📚</div><div class="val">4</div><div class="lbl">Materias Registradas</div></div>
+            <div class="stat"><div class="ico">⏰</div><div class="val">5</div><div class="lbl">Tareas Pendientes</div></div>
+            <div class="stat"><div class="ico">✅</div><div class="val">23</div><div class="lbl">Tareas Completadas</div></div>
+            <div class="stat hl"><div class="ico">📝</div><div class="val">13</div><div class="lbl">Apuntes Creados</div></div>
+          </div>
+
+          <div class="card">
+            <h2>📈 Progreso de Tareas <span class="pill ok" style="margin-left:auto">72%</span></h2>
+            <div class="meter">
+              <div class="ring">
+                <svg width="64" height="64" viewBox="0 0 64 64">
+                  <circle cx="32" cy="32" r="27" fill="none" stroke="var(--success-bg)" stroke-width="7"/>
+                  <circle cx="32" cy="32" r="27" fill="none" stroke="var(--success)" stroke-width="7"
+                          stroke-linecap="round" stroke-dasharray="169.6" stroke-dashoffset="47.5"/>
+                </svg>
+                <div class="rval" style="color:var(--success)">72%</div>
+              </div>
+              <div class="riskinfo">
+                <b>23 de 32 tareas completadas</b>
+                <p>Completa 2 tareas más para superar tu récord semanal. ¡Vas muy bien! 🚀</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>🗓️ Clases de Hoy <span class="link" onclick="openView('schedule')">Ver horario →</span></h2>
+            <div class="nextclass">
+              <div class="chip" style="background:linear-gradient(135deg,#3B82F6,#2563EB)"><small>08:00</small>10:00</div>
+              <div class="meta">
+                <b>Cálculo diferencial</b>
+                <span>Dra. Laura Gómez | Salón: B-301</span>
+              </div>
+            </div>
+            <div class="nextclass" style="margin-top:10px">
+              <div class="chip" style="background:linear-gradient(135deg,#F59E0B,#F97316)"><small>10:00</small>12:00</div>
+              <div class="meta">
+                <b>Programación I</b>
+                <span>Ing. Marco Ruiz | Salón: Lab 4</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>📌 Tareas Próximas <span class="link" onclick="openView('subjects')">Ver materias →</span></h2>
+            <div class="task" data-done="false">
+              <div class="check" onclick="toggleTask(this)"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+              <div style="flex:1">
+                <div class="tname">Resolver taller de límites</div>
+                <div class="tsub" style="display:flex;gap:6px;align-items:center;margin-top:3px;flex-wrap:wrap">
+                  <span class="pill primary">Cálculo</span>
+                  <span style="font-size:11px">📅 8 ago</span>
+                </div>
+              </div>
+              <span class="pill danger">HIGH</span>
+            </div>
+            <div class="task" data-done="false">
+              <div class="check" onclick="toggleTask(this)"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+              <div style="flex:1">
+                <div class="tname">CRUD con NestJS + Prisma</div>
+                <div class="tsub" style="display:flex;gap:6px;align-items:center;margin-top:3px;flex-wrap:wrap">
+                  <span class="pill warn">Programación</span>
+                  <span style="font-size:11px">📅 12 ago</span>
+                </div>
+              </div>
+              <span class="pill warn">MEDIUM</span>
+            </div>
+            <div class="task" data-done="false">
+              <div class="check" onclick="toggleTask(this)"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+              <div style="flex:1">
+                <div class="tname">Práctica de vectores</div>
+                <div class="tsub" style="display:flex;gap:6px;align-items:center;margin-top:3px;flex-wrap:wrap">
+                  <span class="pill ok">Física</span>
+                  <span style="font-size:11px">📅 15 ago</span>
+                </div>
+              </div>
+              <span class="pill soft">LOW</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>🎮 Gamificación</h2>
+            <div style="display:flex;align-items:center;gap:14px;margin-top:12px">
+              <div style="width:62px;height:62px;border-radius:50%;background:var(--primary-grad);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 10px 22px rgba(91,103,241,.4);flex:none">
+                <span style="font-size:9px;font-weight:700;opacity:.85">NIVEL</span>
+                <span style="font-size:20px;font-weight:800;line-height:1">7</span>
+              </div>
+              <div style="flex:1">
+                <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;gap:8px">
+                  <span>2,340 XP</span><span style="color:var(--muted)">3,000 XP · Siguiente Nivel</span>
+                </div>
+                <div class="progress" style="margin-top:6px"><i style="width:78%"></i></div>
+              </div>
+            </div>
+            <div style="margin-top:12px">
+              <span style="font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Logros Recientes</span>
+              <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+                <span class="pill ok">🔥 Racha 10 días</span>
+                <span class="pill primary">📚 50 tareas</span>
+                <span class="pill warn">💼 CV creado</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>🛡️ Riesgo Académico</h2>
+            <div class="meter">
+              <div class="ring">
+                <svg width="64" height="64" viewBox="0 0 64 64">
+                  <circle cx="32" cy="32" r="27" fill="none" stroke="var(--warning-bg)" stroke-width="7"/>
+                  <circle cx="32" cy="32" r="27" fill="none" stroke="var(--warning)" stroke-width="7"
+                          stroke-linecap="round" stroke-dasharray="169.6" stroke-dashoffset="76.3"/>
+                </svg>
+                <div class="rval" style="color:var(--warning)">55%</div>
+              </div>
+              <div class="riskinfo">
+                <b>Nivel de riesgo: MEDIO</b>
+                <p>Basado en tareas atrasadas, brechas de conocimiento y participación general.</p>
+                <a class="risklink" onclick="openView('risk')">Ver análisis →</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>🎯 Metas de Aprendizaje <span class="link" onclick="openView('metas')">Gestionar metas →</span></h2>
+            <div style="margin-top:12px;display:flex;flex-direction:column;gap:12px">
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:12.5px;font-weight:700"><span>Aprobar Cálculo I</span><span style="color:var(--muted)">65%</span></div>
+                <div class="progress" style="margin-top:5px"><i style="width:65%"></i></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:12.5px;font-weight:700"><span>Conseguir práctica Backend</span><span style="color:var(--muted)">40%</span></div>
+                <div class="progress" style="margin-top:5px"><i style="width:40%"></i></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ MATERIAS ============ -->
+        <section id="tab-subjects" class="tab">
+          <div class="viewhead"><h1>Materias</h1><div class="spacer"></div></div>
+          <div class="subjects">
+            <div class="subject" onclick="openView('subjectdetail')">
+              <div class="bar" style="background:#3B82F6"></div>
+              <h3>Cálculo diferencial</h3>
+              <div class="code">MAT-101 · 3 cr</div>
+              <div class="foot"><span>2 tareas · 4 apuntes</span><div class="mini" style="background:linear-gradient(135deg,#3B82F6,#2563EB)">C</div></div>
+            </div>
+            <div class="subject" onclick="openView('subjectdetail')">
+              <div class="bar" style="background:#8B5CF6"></div>
+              <h3>Álgebra lineal</h3>
+              <div class="code">MAT-102 · 3 cr</div>
+              <div class="foot"><span>1 tarea · 2 apuntes</span><div class="mini" style="background:linear-gradient(135deg,#8B5CF6,#7C3AED)">A</div></div>
+            </div>
+            <div class="subject" onclick="openView('subjectdetail')">
+              <div class="bar" style="background:#F59E0B"></div>
+              <h3>Programación I</h3>
+              <div class="code">INF-201 · 4 cr</div>
+              <div class="foot"><span>3 tareas · 6 apuntes</span><div class="mini" style="background:linear-gradient(135deg,#F59E0B,#F97316)">P</div></div>
+            </div>
+            <div class="subject" onclick="openView('subjectdetail')">
+              <div class="bar" style="background:#10B981"></div>
+              <h3>Física I</h3>
+              <div class="code">FIS-110 · 4 cr</div>
+              <div class="foot"><span>2 tareas · 1 apunte</span><div class="mini" style="background:linear-gradient(135deg,#10B981,#0EA5E9)">F</div></div>
+            </div>
+          </div>
+          <button class="btn ghost full">＋ Agregar materia</button>
+          <div class="card">
+            <h2>🧠 Brechas de Conocimiento <span class="link" onclick="openView('brechas')">Ver todas →</span></h2>
+            <div style="margin-top:12px;display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;align-items:center;gap:10px">
+                <span class="pill danger">Alto</span>
+                <div style="flex:1"><b style="font-size:13px">Límites y continuidad</b><br>
+                <span style="font-size:11.5px;color:var(--muted)">Cálculo diferencial · 3 evidencias</span></div>
+                <a style="font-size:12px;font-weight:700;color:var(--primary)">Practicar</a>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px">
+                <span class="pill warn">Medio</span>
+                <div style="flex:1"><b style="font-size:13px">Vectores en R³</b><br>
+                <span style="font-size:11.5px;color:var(--muted)">Física I · 1 evidencia</span></div>
+                <a style="font-size:12px;font-weight:700;color:var(--primary)">Practicar</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ PROFESOR IA ============ -->
+        <section id="tab-ai" class="tab">
+          <div class="viewhead"><h1>Tutor IA</h1><div class="spacer"></div></div>
+          <div class="chips">
+            <div class="chipq">Explica límites</div>
+            <div class="chipq" onclick="openView('quiz')">Generar quiz de Cálculo</div>
+            <div class="chipq">Mi plan de estudio</div>
+            <div class="chipq">¿Qué gap tengo?</div>
+          </div>
+          <div class="chat" id="chatbox">
+            <div class="msg ai"><span class="tag">TUTOR IA</span>¡Hola Juan! 👋 Veo que el taller de límites vence hoy y tienes un gap en continuidad. ¿Quieres que te lo explique con un ejemplo corto?</div>
+            <div class="msg me">Sí, pero con algo muy simple porfa 🙏</div>
+            <div class="msg ai"><span class="tag">TUTOR IA</span>¡Claro! Imagina que avanzas en una carretera: el <b>límite</b> es a qué altura te acercas al llegar a un punto, sin importar si pasas por ahí. Si el camino es continuo, no hay saltos: llegas y estás exactamente ahí. ¿Quieres practicar con 3 ejercicios?</div>
+          </div>
+          <div class="chatinput">
+            <input id="chattext" placeholder="Pregúntale al Tutor IA…" onkeydown="if(event.key==='Enter')sendMsg()">
+            <button class="send" onclick="sendMsg()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20l18-8L3 4v6l12 2-12 2z"/></svg></button>
+          </div>
+        </section>
+
+        <!-- ============ PERFIL ============ -->
+        <section id="tab-profile" class="tab">
+          <div class="cover">
+            <div class="pava">JP</div>
+          </div>
+          <div class="profile-head">
+            <h3>Juan Pérez</h3>
+            <p>@juanperez · Buenos Aires, Argentina</p>
+            <div class="badges">
+              <span class="pill primary">📘 Ing. en Sistemas</span>
+              <span class="pill ok">Semestre 3</span>
+              <span class="pill warn">Nivel 7</span>
+            </div>
+          </div>
+          <div class="kv">
+            <div class="item"><small>Universidad</small><b>UBA</b></div>
+            <div class="item"><small>Promedio</small><b>6.8 / 10</b></div>
+            <div class="item"><small>Graduación</small><b>Dic 2028</b></div>
+            <div class="item"><small>Cargo deseado</small><b>Backend Dev</b></div>
+          </div>
+
+          <div class="navrow" onclick="openView('cv')">
+            <div class="nico" style="background:linear-gradient(135deg,#5B67F1,#8B5CF6)">📄</div>
+            <div><b>Mi CV</b><span>Desarrollador Backend Junior · 75% completo</span></div>
+            <div class="arrow">›</div>
+          </div>
+
+          <div class="card">
+            <h2>🛠️ Habilidades</h2>
+            <div class="skills">
+              <span class="skill">TypeScript <span class="lvl">AVANZADO</span></span>
+              <span class="skill">NestJS <span class="lvl">INTERMEDIO</span></span>
+              <span class="skill">PostgreSQL <span class="lvl">INTERMEDIO</span></span>
+              <span class="skill">React <span class="lvl">BÁSICO</span></span>
+              <span class="skill">Python <span class="lvl">BÁSICO</span></span>
+            </div>
+          </div>
+          <div class="card">
+            <h2>🧭 Roadmap <span class="link" onclick="openView('roadmap')">Ver completo →</span></h2>
+            <div class="roadmap">
+              <div class="step done"><div class="dot">✓</div><div><b>Fundamentos de Programación</b><span>Completado</span></div></div>
+              <div class="step done"><div class="dot">✓</div><div><b>JavaScript + TypeScript</b><span>Completado</span></div></div>
+              <div class="step cur"><div class="dot">3</div><div><b>APIs REST con NestJS</b><span>En progreso · 2 de 5 pasos</span></div></div>
+              <div class="step"><div class="dot">4</div><div><b>Bases de datos y Prisma</b><span>Pendiente</span></div></div>
+              <div class="step"><div class="dot">5</div><div><b>Deploy y Docker</b><span>Pendiente</span></div></div>
+            </div>
+          </div>
+          <div class="card">
+            <h2>🏆 Logros</h2>
+            <div class="achv">
+              <div><div style="font-size:22px">🔥</div><b>Racha 12 días</b></div>
+              <div><div style="font-size:22px">📚</div><b>50 tareas</b></div>
+              <div><div style="font-size:22px">💼</div><b>CV listo</b></div>
+            </div>
+          </div>
+
+          <div class="navrow" onclick="showLogin()" style="border-color:var(--danger-bg)">
+            <div class="nico" style="background:var(--danger-bg);color:var(--danger)">⏻</div>
+            <div><b style="color:var(--danger)">Cerrar sesión</b><span>Volver al login</span></div>
+            <div class="arrow" style="color:var(--danger)">›</div>
+          </div>
+        </section>
+
+        <!-- ============ CV ============ -->
+        <section id="tab-cv" class="tab">
+          <div class="viewhead">
+            <button class="backbtn" onclick="back()"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+            <h1>Mi CV</h1>
+            <div class="spacer"></div>
+          </div>
+
+          <div class="card" style="margin-top:14px">
+            <div style="display:flex;align-items:center;gap:10px">
+              <b style="font-size:13px">Completitud del CV</b>
+              <span class="pill primary" style="margin-left:auto">75%</span>
+            </div>
+            <div class="progress"><i style="width:75%"></i></div>
+            <div style="display:flex;gap:10px;margin-top:12px">
+              <button class="btn primary" style="flex:1">⬇ Descargar PDF</button>
+              <button class="btn ghost" style="flex:1">🤖 Analizar con IA</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>🤖 Analizador de CV</h2>
+            <p style="font-size:12px;color:var(--muted);margin-top:6px">Sube tu CV en PDF o DOCX y la IA lo evalúa contra el mercado.</p>
+            <button class="btn ghost full" style="margin-top:10px">📎 Subir CV (PDF / DOCX)</button>
+            <div style="margin-top:12px;padding:12px 14px;border-radius:14px;background:var(--surface2);border:1px solid var(--glass-border);font-size:12px;line-height:1.6;color:var(--muted)">
+              🟢 <b style="color:var(--success)">82/100</b> · faltan keywords de Docker y CI/CD · 3 recomendaciones para tu perfil
+            </div>
+          </div>
+
+          <div class="cvpreview">
+            <div class="cvname">Juan Pérez</div>
+            <div class="cvtitle">Desarrollador Backend Junior</div>
+            <div class="cvsum">Estudiante de Ingeniería en Sistemas apasionado por las APIs y la arquitectura de software. Construyo soluciones con NestJS, TypeScript y PostgreSQL, y me interesa el diseño de sistemas escalables.</div>
+            <div style="display:flex;gap:6px;margin-top:12px;flex-wrap:wrap">
+              <span class="pill soft">🔗 github.com/juanperez</span>
+              <span class="pill soft">💼 linkedin.com/in/juanperez</span>
+              <span class="pill soft">🌐 juanperez.dev</span>
+            </div>
+          </div>
+
+          <div class="cvsec">
+            <h4>💼 Experiencia</h4>
+            <div class="cvitem">
+              <div class="dotico">💼</div>
+              <div><b>Desarrollador Backend — StudyHub</b><span>Feb 2024 – Nov 2025 · Bogotá</span></div>
+            </div>
+          </div>
+          <div class="cvsec">
+            <h4>📘 Educación</h4>
+            <div class="cvitem">
+              <div class="dotico">📘</div>
+              <div><b>Ingeniería de Sistemas — UBA</b><span>2022 – 2028 (en curso)</span></div>
+            </div>
+          </div>
+          <div class="cvsec">
+            <h4>🚀 Proyectos</h4>
+            <div class="cvitem">
+              <div class="dotico">🚀</div>
+              <div><b>StudyHub</b><span>Plataforma académica con IA · NestJS, PostgreSQL, Groq</span></div>
+            </div>
+            <div class="cvitem">
+              <div class="dotico">🌦️</div>
+              <div><b>API Clima</b><span>Servicio de clima con caché · Node, Redis</span></div>
+            </div>
+          </div>
+          <div class="cvsec">
+            <h4>📜 Certificados</h4>
+            <div class="cvitem">
+              <div class="dotico">📜</div>
+              <div><b>AWS Cloud Practitioner</b><span>Amazon Web Services · Sep 2025</span></div>
+            </div>
+          </div>
+          <div class="cvsec">
+            <h4>🌎 Idiomas</h4>
+            <div class="cvitem">
+              <div class="dotico">🌎</div>
+              <div><b>Español</b><span>Nativo</span></div>
+            </div>
+            <div class="cvitem">
+              <div class="dotico">🌎</div>
+              <div><b>Inglés</b><span>Intermedio</span></div>
+            </div>
+          </div>
+          <div class="addrow">＋ Agregar sección</div>
+          <button class="btn ghost full">🔗 Compartir CV público (juan-perez-1712345678)</button>
+        </section>
+
+        <!-- ============ LABORATORIO ============ -->
+        <section id="tab-lab" class="tab">
+          <div class="viewhead">
+            <button class="backbtn" onclick="back()"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+            <h1>Laboratorio</h1>
+            <div class="spacer"></div>
+          </div>
+
+          <div class="stats">
+            <div class="stat"><div class="ico">🧪</div><div class="val">12</div><div class="lbl">resueltos</div></div>
+            <div class="stat"><div class="ico">🎯</div><div class="val">78%</div><div class="lbl">precisión</div></div>
+            <div class="stat hl"><div class="ico">🔥</div><div class="val">5</div><div class="lbl">racha práctica</div></div>
+          </div>
+
+          <div class="chips">
+            <div class="langchip active">Todos</div>
+            <div class="langchip">Python</div>
+            <div class="langchip">TypeScript</div>
+            <div class="langchip">JavaScript</div>
+            <div class="langchip">SQL</div>
+          </div>
+
+          <div class="card">
+            <h2>▶️ En el editor</h2>
+            <div class="codecard">
+              <div><span class="ln">1</span> <span class="kw">def</span> <span class="fn">suma</span>(a, b):</div>
+              <div><span class="ln">2</span>     <span class="kw">return</span> a + b</div>
+              <div><span class="ln">3</span></div>
+              <div><span class="ln">4</span> <span class="com"># casos: (5,3)→8 · (−1,1)→0 · (0,0)→0</span></div>
+            </div>
+            <div class="runrow">
+              <button class="runbtn" onclick="runCode(this)"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Ejecutar</button>
+              <div class="output">✔ 3/3 casos pasaron · 12ms · +15 XP</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>📚 Ejercicios</h2>
+            <div class="exer">
+              <div class="xbar" style="background:linear-gradient(135deg,#3B82F6,#2563EB);color:#fff">∑</div>
+              <div><b>Suma de dos números</b><div class="xtag">Python · Fácil · 3 casos</div></div>
+              <span class="xstat" style="color:var(--success)">✔ 3/3</span>
+            </div>
+            <div class="exer">
+              <div class="xbar" style="background:linear-gradient(135deg,#EC4899,#DB2777);color:#fff">↻</div>
+              <div><b>Invertir una cadena</b><div class="xtag">TypeScript · Media · 4 casos</div></div>
+              <span class="xstat" style="color:var(--warning)">2/4</span>
+            </div>
+            <div class="exer">
+              <div class="xbar" style="background:linear-gradient(135deg,#F59E0B,#F97316);color:#fff">F</div>
+              <div><b>FizzBuzz</b><div class="xtag">JavaScript · Fácil · 5 casos</div></div>
+              <span class="xstat" style="color:var(--success)">✔ 5/5</span>
+            </div>
+            <div class="exer">
+              <div class="xbar" style="background:linear-gradient(135deg,#EF4444,#DC2626);color:#fff">≣</div>
+              <div><b>Búsqueda binaria</b><div class="xtag">Python · Difícil · 6 casos</div></div>
+              <span class="xstat" style="color:var(--muted)">Nuevo</span>
+            </div>
+            <div class="addrow">＋ Nuevo ejercicio</div>
+          </div>
+
+          <div class="card">
+            <h2>🕐 Historial de intentos</h2>
+            <div class="session">
+              <div class="sdate"><small>AYER</small>+15</div>
+              <div><b>Suma de dos números</b><span>✔ 3/3 casos · Python</span></div>
+            </div>
+            <div class="session">
+              <div class="sdate"><small>12 JUN</small>+0</div>
+              <div><b>Invertir una cadena</b><span>✘ 2/4 casos · TypeScript</span></div>
+            </div>
+            <div class="session">
+              <div class="sdate"><small>10 JUN</small>+20</div>
+              <div><b>FizzBuzz</b><span>✔ 5/5 casos · JavaScript</span></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ HORARIO ============ -->
+        <section id="tab-schedule" class="tab">
+          <div class="viewhead">
+            <button class="backbtn" onclick="back()"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+            <h1>Horario</h1>
+            <div class="spacer"></div>
+          </div>
+
+          <div class="card" style="margin-top:14px">
+            <h2>📅 Semana del 10 – 16 ago</h2>
+            <div style="margin-top:6px">
+              <div class="day">
+                <div class="dname">Lunes</div>
+                <div class="dchip" style="background:linear-gradient(135deg,#3B82F6,#2563EB)">Cálculo diferencial <small>08:00–10:00 · Aula B-301</small></div>
+              </div>
+              <div class="day">
+                <div class="dname"></div>
+                <div class="dchip" style="background:linear-gradient(135deg,#F59E0B,#F97316)">Programación I <small>10:00–12:00 · Lab 4</small></div>
+              </div>
+              <div class="day">
+                <div class="dname">Martes</div>
+                <div class="dchip" style="background:linear-gradient(135deg,#8B5CF6,#7C3AED)">Álgebra lineal <small>09:00–11:00 · Aula 204</small></div>
+              </div>
+              <div class="day">
+                <div class="dname"></div>
+                <div class="dchip" style="background:linear-gradient(135deg,#10B981,#0EA5E9)">Física I <small>14:00–16:00 · Lab Fís</small></div>
+              </div>
+              <div class="day">
+                <div class="dname">Miércoles</div>
+                <div class="dchip" style="background:linear-gradient(135deg,#3B82F6,#2563EB)">Cálculo diferencial <small>08:00–10:00 · Aula B-301</small></div>
+              </div>
+              <div class="day">
+                <div class="dname"></div>
+                <div class="dchip" style="background:linear-gradient(135deg,#F59E0B,#F97316)">Lab. Programación <small>12:00–14:00 · Lab 4</small></div>
+              </div>
+              <div class="day">
+                <div class="dname">Jueves</div>
+                <div class="dchip" style="background:linear-gradient(135deg,#8B5CF6,#7C3AED)">Álgebra lineal <small>09:00–11:00 · Aula 204</small></div>
+              </div>
+              <div class="day">
+                <div class="dname"></div>
+                <div class="dchip" style="background:linear-gradient(135deg,#10B981,#0EA5E9)">Física I <small>14:00–16:00 · Lab Fís</small></div>
+              </div>
+              <div class="day">
+                <div class="dname">Viernes</div>
+                <div class="dchip" style="background:linear-gradient(135deg,#F59E0B,#F97316)">Programación I <small>10:00–12:00 · Lab 4</small></div>
+              </div>
+              <div class="day">
+                <div class="dname">Sáb–Dom</div>
+                <div class="dchip" style="background:var(--surface2);color:var(--muted);border:1px solid var(--glass-border)">Sin clases · descansa 🎉</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ RIESGO ============ -->
+        <section id="tab-risk" class="tab">
+          <div class="viewhead">
+            <button class="backbtn" onclick="back()"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+            <h1>Riesgo académico</h1>
+            <div class="spacer"></div>
+          </div>
+
+          <div class="card" style="margin-top:14px">
+            <div class="riskcenter">
+              <div class="ring big">
+                <svg width="104" height="104" viewBox="0 0 104 104">
+                  <circle cx="52" cy="52" r="44" fill="none" stroke="var(--warning-bg)" stroke-width="10"/>
+                  <circle cx="52" cy="52" r="44" fill="none" stroke="var(--warning)" stroke-width="10"
+                          stroke-linecap="round" stroke-dasharray="276.5" stroke-dashoffset="124.4"/>
+                </svg>
+                <div class="rval" style="color:var(--warning)">55</div>
+              </div>
+              <div>
+                <h3>Riesgo medio</h3>
+                <p>Subió 8 puntos esta semana. La IA ya generó un plan de recuperación de 7 días.</p>
+              </div>
+            </div>
+            <button class="btn primary full">📋 Ver plan de 7 días</button>
+          </div>
+
+          <div class="card">
+            <h2>⚖️ ¿Cómo se calcula?</h2>
+            <div class="frow"><span class="fname">Gaps de conocimiento</span><span class="fbar"><i style="width:72%"></i></span><span class="fpct">72%</span></div>
+            <div class="frow"><span class="fname">Tareas vencidas</span><span class="fbar"><i style="width:55%"></i></span><span class="fpct">55%</span></div>
+            <div class="frow"><span class="fname">Confianza IA</span><span class="fbar"><i style="width:48%"></i></span><span class="fpct">48%</span></div>
+            <div class="frow"><span class="fname">Progreso roadmaps</span><span class="fbar"><i style="width:35%"></i></span><span class="fpct">35%</span></div>
+            <div class="frow"><span class="fname">Engagement</span><span class="fbar"><i style="width:28%"></i></span><span class="fpct">28%</span></div>
+          </div>
+
+          <div class="card">
+            <h2>📈 Últimas 6 semanas</h2>
+            <div class="hbars">
+              <div class="hbar"><div class="col" style="height:24%"></div><span>28 jun</span></div>
+              <div class="hbar"><div class="col" style="height:38%"></div><span>5 jul</span></div>
+              <div class="hbar"><div class="col" style="height:30%"></div><span>12 jul</span></div>
+              <div class="hbar"><div class="col" style="height:44%"></div><span>19 jul</span></div>
+              <div class="hbar"><div class="col" style="height:35%"></div><span>26 jul</span></div>
+              <div class="hbar"><div class="col hi" style="height:55%"></div><span>2 ago</span></div>
+            </div>
+            <div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap">
+              <span class="pill danger">Tarea vencida</span>
+              <span class="pill warn">Gap en Cálculo</span>
+              <span class="pill ok">2 metas activas</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ ROADMAP ============ -->
+        <section id="tab-roadmap" class="tab">
+          <div class="viewhead"><h1>Rutas de Aprendizaje IA</h1><div class="spacer"></div></div>
+
+          <div class="card" style="margin-top:14px">
+            <h2>🤖 Generar nuevo Roadmap</h2>
+            <p style="font-size:12px;color:var(--muted);margin-top:6px">A partir de tu rol objetivo o de un empleo guardado</p>
+            <div class="chatinput" style="margin-top:12px">
+              <input id="roadmap-role" placeholder="Rol objetivo · ej. Backend Developer">
+              <button class="send" onclick="document.getElementById('roadmap-role').value='Backend Developer'"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20l18-8L3 4v6l12 2-12 2z"/></svg></button>
+            </div>
+            <div class="chips" style="margin-top:10px">
+              <span class="chipq" onclick="document.getElementById('roadmap-role').value='Backend Developer (desde empleo TechCorp)'">💼 Backend Dev · TechCorp</span>
+              <span class="chipq" onclick="document.getElementById('roadmap-role').value='Full Stack Developer (desde empleo Globant)'">💼 Full Stack · Globant</span>
+            </div>
+            <div class="riskcenter" style="margin-top:14px">
+              <div class="ring big">
+                <svg width="104" height="104" viewBox="0 0 104 104">
+                  <circle cx="52" cy="52" r="44" fill="none" stroke="var(--success-bg)" stroke-width="10"/>
+                  <circle cx="52" cy="52" r="44" fill="none" stroke="var(--success)" stroke-width="10"
+                          stroke-linecap="round" stroke-dasharray="276.5" stroke-dashoffset="185"/>
+                </svg>
+                <div class="rval" style="color:var(--success)">33%</div>
+              </div>
+              <div>
+                <h3>Roadmap para Backend Developer</h3>
+                <p>Generado por IA desde tus skills faltantes · 2 de 6 pasos completados.</p>
+              </div>
+            </div>
+            <div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap">
+              <span class="pill primary">Programación</span>
+              <span class="pill warn">Intermedio</span>
+              <span class="pill soft">⏱ ≈ 120 h</span>
+            </div>
+            <button class="btn ghost full">🔄 Regenerar con IA</button>
+          </div>
+
+          <div class="card">
+            <h2>🗺️ Pasos <span class="pill ok" style="margin-left:auto">2/6</span></h2>
+            <div class="roadmap">
+              <div class="step done"><div class="dot">✓</div><div><b>Fundamentos de Programación</b><span>Skill: Lógica · 20 h · completado</span></div></div>
+              <div class="step done"><div class="dot">✓</div><div><b>JavaScript + TypeScript</b><span>Skill: TypeScript · 25 h · completado</span></div></div>
+              <div class="step cur">
+                <div class="dot">3</div>
+                <div>
+                  <b>APIs REST con NestJS</b><span>Skill: NestJS · 25 h · en progreso</span>
+                  <div style="display:flex;gap:6px;margin-top:7px;flex-wrap:wrap">
+                    <span class="pill soft">🧠 Práctica (quiz)</span>
+                    <span class="pill soft">📄 Recursos</span>
+                  </div>
+                </div>
+              </div>
+              <div class="step"><div class="dot">4</div><div><b>Bases de datos y Prisma</b><span>Skill: PostgreSQL · 20 h · pendiente</span></div></div>
+              <div class="step"><div class="dot">5</div><div><b>Deploy y Docker</b><span>Skill: DevOps · 15 h · pendiente</span></div></div>
+              <div class="step"><div class="dot">6</div><div><b>CI/CD y Redis</b><span>Skill: DevOps · 15 h · pendiente</span></div></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>📚 Roadmaps anteriores</h2>
+            <div class="exer">
+              <div class="xbar" style="background:linear-gradient(135deg,#3B82F6,#2563EB);color:#fff">FS</div>
+              <div><b>Full Stack Developer</b><div class="xtag">Generado hace 3 meses</div></div>
+              <span class="xstat" style="color:var(--primary)">30%</span>
+            </div>
+            <div class="exer">
+              <div class="xbar" style="background:linear-gradient(135deg,#EC4899,#DB2777);color:#fff">DS</div>
+              <div><b>Ciencia de Datos</b><div class="xtag">Generado hace 6 meses</div></div>
+              <span class="xstat" style="color:var(--muted)">10%</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ LOGROS ============ -->
+        <section id="tab-achievements" class="tab">
+          <div class="viewhead">
+            <button class="backbtn" onclick="back()"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+            <h1>Logros</h1>
+            <div class="spacer"></div>
+          </div>
+
+          <div class="card" style="margin-top:14px">
+            <div style="display:flex;align-items:center;gap:10px">
+              <b style="font-size:13px">Nivel 7</b>
+              <span class="pill primary" style="margin-left:auto">2,340 / 3,000 XP</span>
+            </div>
+            <div class="progress"><i style="width:78%"></i></div>
+            <p style="font-size:11.5px;color:var(--muted);margin-top:7px">Faltan 660 XP para el nivel 8 ⚡</p>
+          </div>
+
+          <div class="card">
+            <h2>🏆 Logros</h2>
+            <div class="achgrid">
+              <div class="ach"><div class="aico">🔥</div><b>Racha 10 días</b><div class="apct">Desbloqueado</div></div>
+              <div class="ach"><div class="aico">📚</div><b>50 tareas</b><div class="apct">Desbloqueado</div></div>
+              <div class="ach"><div class="aico">💼</div><b>CV creado</b><div class="apct">Desbloqueado</div></div>
+              <div class="ach"><div class="aico">⚡</div><b>1,000 XP</b><div class="apct">Desbloqueado</div></div>
+              <div class="ach locked"><div class="aico">🧪</div><b>10 ejercicios</b><div class="apct">🔒 8/10</div></div>
+              <div class="ach locked"><div class="aico">🎯</div><b>Promedio 4.0</b><div class="apct">🔒 6.8/10</div></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ METAS ============ -->
+        <section id="tab-metas" class="tab">
+          <div class="viewhead">
+            <button class="backbtn" onclick="back()"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+            <h1>Metas de Aprendizaje</h1>
+            <div class="spacer"></div>
+          </div>
+
+          <div class="card" style="margin-top:14px">
+            <h2>➕ Nueva Meta</h2>
+            <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px">
+              <input class="gfield" placeholder="Título · ej. Aprobar Física I">
+              <input class="gfield" placeholder="Descripción (opcional)">
+              <input class="gfield" type="date" value="2026-09-15">
+              <button class="btn primary full">Crear Meta</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>🎯 Mis metas <span class="pill primary" style="margin-left:auto">2 activas</span></h2>
+            <div style="margin-top:12px;display:flex;flex-direction:column;gap:14px">
+              <div>
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+                  <div><b style="font-size:13.5px">Aprobar Cálculo I</b><br><span style="font-size:11.5px;color:var(--muted)">Dominar límites y derivadas · 📅 15 sep</span></div>
+                  <span class="pill ok">ACTIVA</span>
+                </div>
+                <div class="progress" style="margin-top:7px"><i style="width:65%"></i></div>
+                <span style="font-size:11px;color:var(--muted);margin-top:4px;display:block">Progreso: 65%</span>
+              </div>
+              <div>
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+                  <div><b style="font-size:13.5px">Conseguir práctica Backend</b><br><span style="font-size:11.5px;color:var(--muted)">Roadmap: Backend Developer · 📅 30 nov</span></div>
+                  <span class="pill ok">ACTIVA</span>
+                </div>
+                <div class="progress" style="margin-top:7px"><i style="width:40%"></i></div>
+                <span style="font-size:11px;color:var(--muted);margin-top:4px;display:block">Progreso: 40%</span>
+              </div>
+              <div>
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+                  <div><b style="font-size:13.5px">Certificación AWS Cloud</b><br><span style="font-size:11.5px;color:var(--muted)">Completada · jun 2026</span></div>
+                  <span class="pill soft">COMPLETADA</span>
+                </div>
+                <div class="progress" style="margin-top:7px"><i style="width:100%"></i></div>
+                <span style="font-size:11px;color:var(--muted);margin-top:4px;display:block">Progreso: 100%</span>
+              </div>
+            </div>
+            <p style="font-size:11.5px;color:var(--muted);margin-top:12px">💡 La IA genera una meta por cada paso de tus rutas de aprendizaje.</p>
+          </div>
+        </section>
+
+        <!-- ============ BRECHAS ============ -->
+        <section id="tab-brechas" class="tab">
+          <div class="viewhead">
+            <button class="backbtn" onclick="back()"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+            <h1>Brechas de Conocimiento</h1>
+            <div class="spacer"></div>
+          </div>
+
+          <div class="card" style="margin-top:14px">
+            <h2>🧠 Detectadas por IA</h2>
+            <p style="font-size:11.5px;color:var(--muted);margin-top:6px">Confianza: &lt;50 alta · 50–79 media · ≥80 reforzada</p>
+            <div style="margin-top:12px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;gap:10px">
+                <span class="pill danger">45%</span>
+                <div style="flex:1"><b style="font-size:13px">Límites y continuidad</b><br>
+                <span style="font-size:11.5px;color:var(--muted)">Cálculo · 3 evidencias · memoria + mensajes</span></div>
+                <a style="font-size:12px;font-weight:700;color:var(--primary)" onclick="openView('quiz')">Practicar</a>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px">
+                <span class="pill warn">65%</span>
+                <div style="flex:1"><b style="font-size:13px">Vectores en R³</b><br>
+                <span style="font-size:11.5px;color:var(--muted)">Física · 1 evidencia · quiz fallado</span></div>
+                <a style="font-size:12px;font-weight:700;color:var(--primary)" onclick="openView('quiz')">Practicar</a>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px">
+                <span class="pill ok">85%</span>
+                <div style="flex:1"><b style="font-size:13px">Derivadas básicas</b><br>
+                <span style="font-size:11.5px;color:var(--muted)">Cálculo · quiz correcto reciente</span></div>
+                <a style="font-size:12px;font-weight:700;color:var(--muted)">Reforzada</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>✅ Brechas superadas</h2>
+            <p style="font-size:11.5px;color:var(--muted);margin-top:6px">¡Excelente! Cerraste 2 brechas este mes 🎉</p>
+            <div style="margin-top:10px;display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;align-items:center;gap:10px">
+                <span class="pill ok">✓</span>
+                <div style="flex:1"><b style="font-size:13px;text-decoration:line-through;opacity:.7">Regla de la cadena</b><br>
+                <span style="font-size:11.5px;color:var(--muted)">Cerrada con 3 quizzes correctos</span></div>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px">
+                <span class="pill ok">✓</span>
+                <div style="flex:1"><b style="font-size:13px;text-decoration:line-through;opacity:.7">Cinemática 1D</b><br>
+                <span style="font-size:11.5px;color:var(--muted)">Cerrada con 1 quiz correcto</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ DETALLE DE MATERIA ============ -->
+        <section id="tab-subjectdetail" class="tab">
+          <div class="viewhead">
+            <button class="backbtn" onclick="back()"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+            <h1>Cálculo diferencial</h1>
+            <div class="spacer"></div>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap">
+            <span class="pill primary">MAT-101</span>
+            <span class="pill soft">3 créditos</span>
+            <span class="pill soft">Dra. Laura Gómez</span>
+          </div>
+
+          <div class="card">
+            <h2>🗓️ Horario</h2>
+            <div class="session">
+              <div class="sdate"><small>LUN</small>08:00</div>
+              <div><b>Clase teórica</b><span>Aula B-301 · 08:00 – 10:00</span></div>
+            </div>
+            <div class="session">
+              <div class="sdate"><small>MIÉ</small>08:00</div>
+              <div><b>Clase teórica</b><span>Aula B-301 · 08:00 – 10:00</span></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>📌 Tareas & Evaluaciones</h2>
+            <div class="task" data-done="false">
+              <div class="check" onclick="toggleTask(this)"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+              <div style="flex:1">
+                <div class="tname">Resolver taller de límites</div>
+                <div class="tsub" style="display:flex;gap:6px;margin-top:3px"><span style="font-size:11px">📅 8 ago</span></div>
+              </div>
+              <span class="pill danger">HIGH</span>
+            </div>
+            <div class="task" data-done="false">
+              <div class="check" onclick="toggleTask(this)"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+              <div style="flex:1">
+                <div class="tname">Quiz de derivadas (IA)</div>
+                <div class="tsub" style="display:flex;gap:6px;margin-top:3px"><span style="font-size:11px">📅 14 ago</span></div>
+              </div>
+              <span class="pill warn">MEDIUM</span>
+            </div>
+            <div class="task" data-done="false">
+              <div class="check" onclick="toggleTask(this)"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+              <div style="flex:1">
+                <div class="tname">Parcial 1</div>
+                <div class="tsub" style="display:flex;gap:6px;margin-top:3px"><span style="font-size:11px">📅 28 ago</span></div>
+              </div>
+              <span class="pill danger">HIGH</span>
+            </div>
+            <div class="addrow">＋ Agregar tarea</div>
+          </div>
+
+          <div class="card">
+            <h2>📝 Apuntes</h2>
+            <div class="cvitem">
+              <div class="dotico">📌</div>
+              <div><b>Resumen de derivadas</b><span>La derivada mide la tasa de cambio instantánea… · fijado</span></div>
+            </div>
+            <div class="cvitem">
+              <div class="dotico">📝</div>
+              <div><b>Fórmulas de límites</b><span>Límites notables, indeterminaciones 0/0 y ∞/∞…</span></div>
+            </div>
+            <div class="cvitem">
+              <div class="dotico">📝</div>
+              <div><b>Regla de la cadena</b><span>Ejemplos paso a paso con funciones compuestas…</span></div>
+            </div>
+            <div class="addrow">＋ Nuevo apunte</div>
+          </div>
+        </section>
+
+        <!-- ============ NOTIFICACIONES ============ -->
+        <section id="tab-notifications" class="tab">
+          <div class="viewhead">
+            <button class="backbtn" onclick="back()"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+            <h1>Notificaciones</h1>
+            <span class="pill danger" style="margin-left:auto">3 sin leer</span>
+          </div>
+
+          <button class="btn ghost full" style="margin-top:14px" onclick="markAllNotif()">✓ Marcar todas como leídas</button>
+
+          <div class="card">
+            <div class="notif">
+              <div class="nico">⏰</div>
+              <div style="flex:1"><b>Tarea próxima a vencer</b><div class="nmsg">La tarea 'Resolver taller de límites' vence en 24 horas.</div><div class="ntime">TASK_DUE · hace 1 h</div></div>
+              <div class="nunread"></div>
+              <button class="markbtn" onclick="markNotif(this)">Marcar como leída</button>
+            </div>
+            <div class="notif">
+              <div class="nico">🗓️</div>
+              <div style="flex:1"><b>Clase en 30 minutos</b><div class="nmsg">Cálculo diferencial inicia a las 08:00 en Aula B-301.</div><div class="ntime">CLASS_REMINDER · hace 2 h</div></div>
+              <div class="nunread"></div>
+              <button class="markbtn" onclick="markNotif(this)">Marcar como leída</button>
+            </div>
+            <div class="notif">
+              <div class="nico">🧠</div>
+              <div style="flex:1"><b>Nueva brecha de conocimiento</b><div class="nmsg">Se detectó un gap en 'Límites y continuidad' (confianza 45%).</div><div class="ntime">KNOWLEDGE_GAP · hace 5 h</div></div>
+              <div class="nunread"></div>
+              <button class="markbtn" onclick="markNotif(this)">Marcar como leída</button>
+            </div>
+            <div class="notif read">
+              <div class="nico">🔥</div>
+              <div style="flex:1"><b>Tu racha está en riesgo</b><div class="nmsg">Estudia hoy para mantener tus 12 días de racha.</div><div class="ntime">STREAK_RISK · ayer</div></div>
+              <div class="nunread"></div>
+              <button class="markbtn" onclick="markNotif(this)">✓ Leída</button>
+            </div>
+            <div class="notif read">
+              <div class="nico">📚</div>
+              <div style="flex:1"><b>Plan de recuperación listo</b><div class="nmsg">La IA generó un plan de 7 días para tu riesgo medio.</div><div class="ntime">EXAM_ALERT · ayer</div></div>
+              <div class="nunread"></div>
+              <button class="markbtn" onclick="markNotif(this)">✓ Leída</button>
+            </div>
+            <div class="notif read">
+              <div class="nico">👥</div>
+              <div style="flex:1"><b>Sesión de estudio</b><div class="nmsg">'Maratón de derivadas' inicia mañana a las 18:00.</div><div class="ntime">GROUP_SESSION · 2 días</div></div>
+              <div class="nunread"></div>
+              <button class="markbtn" onclick="markNotif(this)">✓ Leída</button>
+            </div>
+            <div class="notif read">
+              <div class="nico">💼</div>
+              <div style="flex:1"><b>Nuevo match de empleo</b><div class="nmsg">Backend Developer en TechCorp coincide 92% con tu perfil.</div><div class="ntime">JOB_MATCH · 3 días</div></div>
+              <div class="nunread"></div>
+              <button class="markbtn" onclick="markNotif(this)">✓ Leída</button>
+            </div>
+            <div class="notif read">
+              <div class="nico">🗺️</div>
+              <div style="flex:1"><b>Ruta sin progreso</b><div class="nmsg">Tu ruta 'Ciencia de Datos' lleva 7 días sin avance.</div><div class="ntime">ROADMAP_REMINDER · 4 días</div></div>
+              <div class="nunread"></div>
+              <button class="markbtn" onclick="markNotif(this)">✓ Leída</button>
+            </div>
+            <div class="notif read">
+              <div class="nico">✉️</div>
+              <div style="flex:1"><b>Avance de postulación</b><div class="nmsg">Tu postulación a Globant pasó a fase de entrevista.</div><div class="ntime">INTERVIEW · 5 días</div></div>
+              <div class="nunread"></div>
+              <button class="markbtn" onclick="markNotif(this)">✓ Leída</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ QUIZ ============ -->
+        <section id="tab-quiz" class="tab">
+          <div id="quizlist">
+            <div class="viewhead">
+              <button class="backbtn" onclick="back()"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+              <h1>Quizzes</h1>
+              <div class="spacer"></div>
+            </div>
+
+            <div class="card" style="margin-top:14px">
+              <h2>🤖 Generar quiz con IA</h2>
+              <p style="font-size:12px;color:var(--muted);margin-top:6px">Basado en tus gaps de conocimiento · si omites el tema, la IA elige por ti</p>
+              <div class="chips" id="qtopics">
+                <div class="chipq active" onclick="pickChip(this)">Límites y continuidad</div>
+                <div class="chipq" onclick="pickChip(this)">Derivadas</div>
+                <div class="chipq" onclick="pickChip(this)">Vectores en R³</div>
+                <div class="chipq" onclick="pickChip(this)">Integración</div>
+              </div>
+              <div class="chips" id="qdiff" style="margin-top:6px">
+                <div class="langchip active" onclick="pickChip(this)">Básico</div>
+                <div class="langchip" onclick="pickChip(this)">Intermedio</div>
+                <div class="langchip" onclick="pickChip(this)">Avanzado</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;margin-top:12px">
+                <span style="font-size:12.5px;color:var(--muted);font-weight:600">Nº de preguntas (3–15)</span>
+                <div class="stepper">
+                  <button onclick="stepCount(-1)">−</button><b id="qcount">5</b><button onclick="stepCount(1)">＋</button>
+                </div>
+              </div>
+              <button class="btn primary full" onclick="startQuiz()">✨ Generar quiz</button>
+            </div>
+
+            <div class="card">
+              <h2>📝 Mis quizzes</h2>
+              <div class="exer" onclick="startQuiz()" style="cursor:pointer">
+                <div class="xbar" style="background:linear-gradient(135deg,#5B67F1,#8B5CF6);color:#fff">Q</div>
+                <div><b>Límites y continuidad</b><div class="xtag">Cálculo · Intermedio · hace 2 días</div></div>
+                <span class="xstat" style="color:var(--success)">✔ 4/5</span>
+              </div>
+              <div class="exer" onclick="startQuiz()" style="cursor:pointer">
+                <div class="xbar" style="background:linear-gradient(135deg,#10B981,#0EA5E9);color:#fff">Q</div>
+                <div><b>Vectores en R³</b><div class="xtag">Física · Básico · hace 1 semana</div></div>
+                <span class="xstat" style="color:var(--success)">✔ 3/3</span>
+              </div>
+              <div class="exer" onclick="startQuiz()" style="cursor:pointer">
+                <div class="xbar" style="background:linear-gradient(135deg,#EF4444,#F97316);color:#fff">Q</div>
+                <div><b>Derivadas básicas</b><div class="xtag">Cálculo · Intermedio · hace 3 días</div></div>
+                <span class="xstat" style="color:var(--danger)">✘ 2/5</span>
+              </div>
+            </div>
+          </div>
+          <div id="quizplay" style="display:none"></div>
+        </section>
+      </div>
+
+      <!-- ============ LOGIN (liquid glass) ============ -->
+      <section id="tab-login" class="tab loginview">
+        <div class="login-inner">
+          <div class="login-brand">
+            <div class="login-logo">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#FFFFFF" d="M24 8L42 24L24 36L6 24Z M24 3.1L26.4 5.5L24 7.9L21.6 5.5Z M12 33h24a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-24a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2Z M35.6 26.8L38.2 28.4L43.8 42.8L41.2 44Z M42 39.8a2.6 2.6 0 1 0 0 5.2a2.6 2.6 0 1 0 0-5.2Z"/>
+              </svg>
+            </div>
+            <h1>StudyHub</h1>
+            <p>Tu gestión académica con IA: materias, tareas, profesor IA, roadmaps y CV en un solo lugar.</p>
+          </div>
+
+          <div class="glass-form">
+            <div class="seg">
+              <button class="on" id="segin" onclick="setAuth('login')">Iniciar sesión</button>
+              <button id="segup" onclick="setAuth('register')">Crear cuenta</button>
+            </div>
+
+            <div class="authform" id="loginform">
+              <input class="field" type="email" placeholder="Correo electrónico">
+              <input class="field" type="password" placeholder="Contraseña">
+              <button class="btnlogin">Iniciar sesión</button>
+              <button class="btngoogle">
+                <svg class="glogo" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.1 5.7l6.2 5.2C36.9 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
+                Continuar con Google
+              </button>
+            </div>
+
+            <div class="authform" id="regform" style="display:none">
+              <input class="field" type="text" placeholder="Nombre">
+              <input class="field" type="text" placeholder="Apellido">
+              <input class="field" type="email" placeholder="Correo electrónico">
+              <input class="field" type="password" placeholder="Contraseña (mín. 6)">
+              <button class="btnlogin">Crear cuenta</button>
+            </div>
+
+            <p class="authlink" id="authlink">¿Olvidaste tu contraseña?</p>
+          </div>
+
+          <div class="demobtn" onclick="enterDemo()">👀 Ver demo sin cuenta →</div>
+          <p class="authfoot">Acceso protegido · JWT + Google OAuth<br>Hecha para estudiantes, por estudiantes</p>
+        </div>
+      </section>
+
+      <!-- bottom nav — floating glass pill -->
+      <nav class="bottomnav">
+        <button class="navbtn active" data-tab="home" onclick="go('home',this)">
+          <span class="wrap"><svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg></span>
+          Inicio
+        </button>
+        <button class="navbtn" data-tab="subjects" onclick="go('subjects',this)">
+          <span class="wrap"><svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h4v18H6a2 2 0 0 1-2-2zm10-2h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4z"/></svg></span>
+          Materias
+        </button>
+        <button class="navbtn hasnews" data-tab="ai" onclick="go('ai',this)">
+          <span class="wrap"><svg viewBox="0 0 24 24"><path d="M12 3a7 7 0 0 1 7 7v3a4 4 0 0 1-4 4h-6a4 4 0 0 1-4-4v-3a7 7 0 0 1 7-7z"/><path d="M9 21h6"/><circle cx="9.5" cy="10" r="1" fill="currentColor"/><circle cx="14.5" cy="10" r="1" fill="currentColor"/></svg></span>
+          Tutor IA
+        </button>
+        <button class="navbtn" data-tab="roadmap" onclick="go('roadmap',this)">
+          <span class="wrap"><svg viewBox="0 0 24 24"><path d="M5 3v18"/><path d="M5 4.5c3.5-1.8 7 1.8 10 0v10c-3 1.8-6.5-1.8-10 0"/></svg></span>Rutas</button>
+        <button class="navbtn" data-tab="profile" onclick="go('profile',this)">
+          <span class="wrap"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-3.5 4.5-5 8-5s6.5 1.5 8 5"/></svg></span>
+          Perfil
+        </button>
+      </nav>
+    </div>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Modo claro/oscuro">☀️</button>
+  </div>
+  <p class="caption">Maqueta de diseño · <b>StudyHub</b> — estilo liquid glass · vistas: Dashboard, Materias (+detalle), Tutor IA, Rutas de Aprendizaje, Perfil, CV (+analizador), Laboratorio, Quizzes, Metas, Brechas, Horario, Riesgo, Logros, Notificaciones y Login</p>
+</div>
+
+<script>
+  let lastTab = 'home';
+  showLogin();
+  function go(name, btn){
+    if(btn){ lastTab = name; }
+    show(name);
+    document.querySelectorAll('.navbtn').forEach(b => b.classList.remove('active'));
+    if(btn) btn.classList.add('active');
+  }
+  function openView(name){
+    show(name);
+    document.querySelectorAll('.navbtn').forEach(b => b.classList.remove('active'));
+  }
+  function show(name){
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    document.querySelector('.scroll').scrollTop = 0;
+  }
+  function back(){
+    const btn = document.querySelector('.navbtn[data-tab="' + lastTab + '"]');
+    go(lastTab, btn);
+  }
+  function showLogin(){
+    document.querySelector('.screen').classList.add('login');
+    show('login');
+    document.querySelectorAll('.navbtn').forEach(b => b.classList.remove('active'));
+    document.querySelector('.scroll').scrollTop = 0;
+  }
+  function enterDemo(){
+    document.querySelector('.screen').classList.remove('login');
+    go('home', document.querySelector('[data-tab="home"]'));
+  }
+  function setAuth(mode){
+    const login = mode === 'login';
+    document.getElementById('loginform').style.display = login ? 'flex' : 'none';
+    document.getElementById('regform').style.display = login ? 'none' : 'flex';
+    document.getElementById('segin').classList.toggle('on', login);
+    document.getElementById('segup').classList.toggle('on', !login);
+    document.getElementById('authlink').textContent = login ? '¿Olvidaste tu contraseña?' : 'Al registrarte aceptas los términos de uso';
+  }
+  function toggleTask(el){
+    el.closest('.task').classList.toggle('done');
+  }
+  function toggleTheme(){
+    const b = document.body;
+    const dark = b.dataset.theme === 'dark';
+    b.dataset.theme = dark ? 'light' : 'dark';
+    document.querySelector('.theme-toggle').textContent = dark ? '🌙' : '☀️';
+  }
+  function runCode(btn){
+    const out = btn.parentElement.querySelector('.output');
+    out.classList.add('ok');
+    btn.disabled = true;
+    btn.style.opacity = .5;
+  }
+  /* ---------- quiz engine ---------- */
+  const QUIZ_Q = [
+    {q:"¿Cuál es el límite de f(x) = x² cuando x tiende a 3?", o:["6","9","12","No existe"], c:1, e:"Al evaluar x² en x=3: 3² = 9. Las funciones polinómicas son continuas en todo R."},
+    {q:"¿Cuándo existe el límite de una función en un punto?", o:["Siempre que esté definida","Cuando los límites laterales coinciden","Cuando f(a) existe","Nunca puede existir"], c:1, e:"El límite existe si el límite por la izquierda y por la derecha son iguales."},
+    {q:"El límite de (x²−1)/(x−1) cuando x → 1 es…", o:["0","1","2","No existe"], c:2, e:"Factoriza: (x−1)(x+1)/(x−1) = x+1. Al evaluar en x=1 da 2."},
+    {q:"Una función f es continua en a si…", o:["lim f(x) = f(a)","f(a) existe","lim f(x) existe","Siempre es continua"], c:0, e:"Continuidad: el límite existe, f(a) existe y ambos coinciden."},
+    {q:"¿Qué significa que el límite de f(x) sea ∞ cuando x → a?", o:["f(a) = ∞","La función crece sin cota cerca de a","El límite no se puede calcular","La función es constante"], c:1, e:"Límite infinito = la función crece o decrece sin límite al acercarse a a."}
+  ];
+  let quiz = {list: QUIZ_Q, idx: 0, ok: 0, answered: false};
+  function startQuiz(){
+    const n = Math.min(Math.max(parseInt(document.getElementById('qcount').textContent) || 5, 3), 15);
+    quiz.list = shuffle(QUIZ_Q).slice(0, n);
+    quiz.idx = 0; quiz.ok = 0; quiz.answered = false;
+    document.getElementById('quizlist').style.display = 'none';
+    document.getElementById('quizplay').style.display = 'block';
+    renderQ();
+  }
+  function shuffle(a){ const r = a.slice(); for(let i=r.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [r[i],r[j]]=[r[j],r[i]]; } return r; }
+  function renderQ(){
+    const el = document.getElementById('quizplay');
+    const q = quiz.list[quiz.idx];
+    quiz.answered = false;
+    el.innerHTML = `
+      <div class="card" style="margin-top:14px">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <b style="font-size:12px">Pregunta ${quiz.idx+1} de ${quiz.list.length}</b>
+          <span class="pill primary">${quiz.ok} aciertos</span>
+        </div>
+        <div class="progress" style="margin-top:8px"><i style="width:${Math.round(quiz.idx/quiz.list.length*100)}%"></i></div>
+        <h3 style="font-size:16px;line-height:1.45;margin-top:14px">${q.q}</h3>
+        <div style="display:flex;flex-direction:column;gap:9px;margin-top:14px">
+          ${q.o.map((opt,i)=>`<button class="qopt" onclick="answerQ(this,${i})">${String.fromCharCode(65+i)}. ${opt}</button>`).join('')}
+        </div>
+        <div id="qexp" style="display:none;margin-top:12px;padding:11px 14px;border-radius:14px;font-size:12.5px;line-height:1.5;background:var(--surface2);border:1px solid var(--glass-border)"></div>
+        <button class="btn primary full" id="qnext" style="display:none" onclick="quizNext()">${quiz.idx+1===quiz.list.length?'Ver resultado':'Siguiente →'}</button>
+      </div>
+      <button class="btn ghost full" onclick="quizExit()">← Volver a la lista</button>`;
+  }
+  function answerQ(btn, i){
+    if(quiz.answered) return;
+    quiz.answered = true;
+    const q = quiz.list[quiz.idx];
+    const btns = document.querySelectorAll('#quizplay .qopt');
+    btns.forEach(b => b.disabled = true);
+    if(i === q.c){ btn.classList.add('correct'); quiz.ok++; }
+    else { btn.classList.add('wrong'); btns[q.c].classList.add('correct'); }
+    const exp = document.getElementById('qexp');
+    exp.style.display = 'block';
+    exp.innerHTML = `<b>${i===q.c?'¡Correcto! ✓':'Incorrecto ✗'}</b><br>${q.e}`;
+    document.getElementById('qnext').style.display = 'flex';
+  }
+  function quizNext(){
+    quiz.idx++;
+    if(quiz.idx < quiz.list.length) renderQ();
+    else renderResult();
+  }
+  function renderResult(){
+    const el = document.getElementById('quizplay');
+    const pct = Math.round(quiz.ok/quiz.list.length*100);
+    const passed = pct >= 60;
+    const col = passed ? 'success' : 'danger';
+    const dash = 276.5*(1-pct/100);
+    el.innerHTML = `
+      <div class="card" style="margin-top:14px;text-align:center;padding:26px 16px">
+        <div class="ring big" style="margin:0 auto">
+          <svg width="104" height="104" viewBox="0 0 104 104">
+            <circle cx="52" cy="52" r="44" fill="none" stroke="var(--${col}-bg)" stroke-width="10"/>
+            <circle cx="52" cy="52" r="44" fill="none" stroke="var(--${col})" stroke-width="10" stroke-linecap="round" stroke-dasharray="276.5" stroke-dashoffset="${dash}"/>
+          </svg>
+          <div class="rval" style="color:var(--${col})">${pct}%</div>
+        </div>
+        <h3 style="margin-top:14px">${passed?'¡Bien hecho! 🎉':'Sigue practicando 💪'}</h3>
+        <p style="font-size:12.5px;color:var(--muted);margin-top:4px">${quiz.ok} de ${quiz.list.length} respuestas correctas · ${passed?'Gap reforzado ✓':'Recomendado repasar el tema'}</p>
+        <div style="display:flex;gap:10px;margin-top:18px">
+          <button class="btn ghost" style="flex:1" onclick="quizExit()">Listo</button>
+          <button class="btn primary" style="flex:1" onclick="startQuiz()">Intentar de nuevo</button>
+        </div>
+      </div>`;
+  }
+  function quizExit(){
+    document.getElementById('quizplay').style.display = 'none';
+    document.getElementById('quizlist').style.display = 'block';
+  }
+  function stepCount(d){
+    const el = document.getElementById('qcount');
+    const n = Math.min(Math.max(parseInt(el.textContent) + d, 3), 15);
+    el.textContent = n;
+  }
+  function pickChip(el){
+    el.parentElement.querySelectorAll('.chipq,.langchip').forEach(o => o.classList.remove('active'));
+    el.classList.add('active');
+  }
+  function markNotif(btn){
+    btn.closest('.notif').classList.add('read');
+    btn.textContent = '✓ Leída';
+  }
+  function markAllNotif(){
+    document.querySelectorAll('#tab-notifications .notif').forEach(n => n.classList.add('read'));
+    document.querySelectorAll('#tab-notifications .markbtn').forEach(b => b.textContent = '✓ Leída');
+  }
+  function sendMsg(){
+    const inp = document.getElementById('chattext');
+    const text = inp.value.trim();
+    if(!text) return;
+    const box = document.getElementById('chatbox');
+    const me = document.createElement('div');
+    me.className = 'msg me'; me.textContent = text;
+    box.appendChild(me);
+    inp.value = '';
+    setTimeout(() => {
+      const ai = document.createElement('div');
+      ai.className = 'msg ai';
+      ai.innerHTML = '<span class="tag">TUTOR IA</span>¡Buena pregunta! 📚 Te lo explico paso a paso y te dejo 3 ejercicios para practicar en el Laboratorio. ¿Seguimos?';
+      box.appendChild(ai);
+      box.scrollIntoView({behavior:'smooth', block:'end'});
+    }, 700);
+    box.scrollIntoView({behavior:'smooth', block:'end'});
+  }
+</script>
+</body>
+</html>
