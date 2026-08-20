@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -165,12 +166,18 @@ fun QuizPlayer(
                     }
                 },
                 text = {
-                    RichText(
-                        text = explainText,
-                        color = StudyHubColors.TextSecondary,
-                        fontSize = 14.sp,
-                        lineHeight = 21.sp,
-                    )
+                    Column(
+                        modifier = Modifier
+                            .heightIn(max = 400.dp)
+                            .verticalScroll(rememberScrollState()),
+                    ) {
+                        RichText(
+                            text = explainText,
+                            color = StudyHubColors.TextSecondary,
+                            fontSize = 14.sp,
+                            lineHeight = 21.sp,
+                        )
+                    }
                 },
                 confirmButton = {
                     TextButton(onClick = { showExplainDialog = false }) {
