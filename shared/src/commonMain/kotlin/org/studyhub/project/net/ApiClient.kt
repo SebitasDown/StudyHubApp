@@ -819,6 +819,17 @@ class ApiClient(engine: HttpClientEngine? = null) {
         }
     }
 
+    suspend fun explainAnswer(question: String, choices: List<String>, correctAnswer: String, topic: String = "", isCorrect: Boolean = false): String {
+        val response: ExplainAnswerResponse = mutate(block = {
+            client.post("/ai/explain-answer") {
+                header("Authorization", auth())
+                contentType(ContentType.Application.Json)
+                setBody(ExplainAnswerRequest(question, choices, correctAnswer, topic, isCorrect))
+            }
+        })
+        return response.explanation
+    }
+
     // ─── CV / Hoja de vida ───────────────────────────────────────────────
     suspend fun resume(): ResumeMe = request("resume/me") {
         client.get("/resume/me") { header("Authorization", auth()) }

@@ -20,9 +20,13 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.material.icons.outlined.Close
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Quiz
 import androidx.compose.material.icons.outlined.Save
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -50,6 +54,7 @@ data class QuizItem(
     val options: List<String>,
     val correctIndex: Int,
     val explanation: String,
+    val topic: String = "",
 )
 
 /**
@@ -71,6 +76,10 @@ fun QuizPlayer(
     var answered by remember { mutableStateOf(false) }
     var correctCount by remember { mutableIntStateOf(0) }
     var finished by remember { mutableStateOf(false) }
+    var showExplainDialog by remember { mutableStateOf(false) }
+    var explainText by remember { mutableStateOf("") }
+    var explaining by remember { mutableStateOf(false) }
+    val scope = rememberCoroutineScope()
 
     Column(Modifier.fillMaxSize()) {
         FullScreenBackBar(
@@ -100,6 +109,7 @@ fun QuizPlayer(
                         total = items.size,
                         selected = selected,
                         answered = answered,
+                        explaining = explaining,
                         onSelect = { i ->
                             if (!answered) {
                                 selected = i
@@ -116,9 +126,57 @@ fun QuizPlayer(
                                 finished = true
                             }
                         },
+                        onExplain = {
+                            explaining = true
+                            explainText = ""
+                            scope.launch {
+                                try {
+                                    val correct = if (q.correctIndex in q.options.indices) q.options[q.correctIndex] else ""
+                                    explainText = Api.client.explainAnswer(
+                                        question = q.question,
+                                        choices = q.options,
+                                        correctAnswer = correct,
+                                        topic = q.topic,
+                                        isCorrect = selected == q.correctIndex,
+                                    )
+                                } catch (e: Exception) {
+                                    explainText = "No se pudo generar la explicación: ${e.message}"
+                                }
+                                explaining = false
+                                showExplainDialog = true
+                            }
+                        },
                     )
                 }
             }
+        }
+
+        if (showExplainDialog) {
+            AlertDialog(
+                onDismissRequest = { showExplainDialog = false },
+                title = {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        AppIcon(Icons.Outlined.Info, tint = StudyHubColors.Primary, size = 22.dp)
+                        Spacer(Modifier.width(8.dp))
+                        Text("Explicación IA", color = StudyHubColors.TextPrimary, fontSize = 17.sp, fontWeight = FontWeight.ExtraBold)
+                    }
+                },
+                text = {
+                    RichText(
+                        text = explainText,
+                        color = StudyHubColors.TextSecondary,
+                        fontSize = 14.sp,
+                        lineHeight = 21.sp,
+                    )
+                },
+                confirmButton = {
+                    TextButton(onClick = { showExplainDialog = false }) {
+                        Text("Entendido", color = StudyHubColors.Primary, fontWeight = FontWeight.Bold)
+                    }
+                },
+                containerColor = StudyHubColors.Surface,
+                shape = RoundedCornerShape(20.dp),
+            )
         }
     }
 }
@@ -132,6 +190,8 @@ private fun QuestionView(
     answered: Boolean,
     onSelect: (Int) -> Unit,
     onNext: () -> Unit,
+    onExplain: () -> Unit = {},
+    explaining: Boolean = false,
 ) {
     val isCorrect = selected == question.correctIndex
 
@@ -261,6 +321,33 @@ private fun QuestionView(
                         lineHeight = 18.sp,
                     )
                 }
+                Spacer(Modifier.height(10.dp))
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(10.dp))
+                        .background(StudyHubColors.Primary.copy(alpha = 0.08f))
+                        .clickable(enabled = !explaining) { onExplain() }
+                        .padding(horizontal = 14.dp, vertical = 10.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    if (explaining) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(16.dp),
+                            strokeWidth = 2.dp,
+                            color = StudyHubColors.Primary,
+                        )
+                    } else {
+                        AppIcon(Icons.Outlined.Info, tint = StudyHubColors.Primary, size = 18.dp)
+                    }
+                    Spacer(Modifier.width(8.dp))
+                    Text(
+                        text = if (explaining) "IA explicando..." else "¿Por qué?",
+                        color = StudyHubColors.Primary,
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.SemiBold,
+                    )
+                }
             }
             Spacer(Modifier.height(14.dp))
             PrimaryButton(
@@ -363,6 +450,7 @@ fun QuizPlayScreen(
                 options = q.choices,
                 correctIndex = q.choices.indexOf(q.answer).coerceAtLeast(0),
                 explanation = q.explanation,
+                topic = title,
             )
         },
         onBack = onBack,

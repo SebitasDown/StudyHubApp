@@ -616,6 +616,18 @@ data class GenerateQuizRequest(
 )
 
 @Serializable
+data class ExplainAnswerRequest(
+    val question: String = "",
+    val choices: List<String> = emptyList(),
+    val correctAnswer: String = "",
+    val topic: String = "",
+    val isCorrect: Boolean = false,
+)
+
+@Serializable
+data class ExplainAnswerResponse(val explanation: String = "")
+
+@Serializable
 data class ResourceResponse(val resource: AiResource? = null)
 
 @Serializable
