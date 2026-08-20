@@ -621,7 +621,6 @@ data class ExplainAnswerRequest(
     val choices: List<String> = emptyList(),
     val correctAnswer: String = "",
     val topic: String = "",
-    val isCorrect: Boolean = false,
 )
 
 @Serializable

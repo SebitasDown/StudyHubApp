@@ -137,10 +137,13 @@ fun QuizPlayer(
                                         choices = q.options,
                                         correctAnswer = correct,
                                         topic = q.topic,
-                                        isCorrect = selected == q.correctIndex,
                                     )
-                                } catch (e: Exception) {
-                                    explainText = "No se pudo generar la explicación: ${e.message}"
+                                } catch (_: Exception) {
+                                    // Si el endpoint IA no está deployado, usar la explicación estática del quiz
+                                    explainText = q.explanation.ifBlank {
+                                        "La respuesta correcta es: **${if (q.correctIndex in q.options.indices) q.options[q.correctIndex] else "N/A"}**. " +
+                                        "La explicación detallada estará disponible cuando el backend se actualice."
+                                    }
                                 }
                                 explaining = false
                                 showExplainDialog = true

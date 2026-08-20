@@ -819,12 +819,12 @@ class ApiClient(engine: HttpClientEngine? = null) {
         }
     }
 
-    suspend fun explainAnswer(question: String, choices: List<String>, correctAnswer: String, topic: String = "", isCorrect: Boolean = false): String {
+    suspend fun explainAnswer(question: String, choices: List<String>, correctAnswer: String, topic: String = ""): String {
         val response: ExplainAnswerResponse = mutate(block = {
             client.post("/ai/explain-answer") {
                 header("Authorization", auth())
                 contentType(ContentType.Application.Json)
-                setBody(ExplainAnswerRequest(question, choices, correctAnswer, topic, isCorrect))
+                setBody(ExplainAnswerRequest(question, choices, correctAnswer, topic))
             }
         })
         return response.explanation
