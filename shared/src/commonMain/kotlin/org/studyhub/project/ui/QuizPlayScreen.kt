@@ -166,10 +166,8 @@ fun QuizPlayer(
                     }
                 },
                 text = {
-                    Column(
-                        modifier = Modifier
-                            .heightIn(max = 400.dp)
-                            .verticalScroll(rememberScrollState()),
+                    Box(
+                        Modifier.fillMaxWidth().heightIn(max = 350.dp).verticalScroll(rememberScrollState()),
                     ) {
                         RichText(
                             text = explainText,
