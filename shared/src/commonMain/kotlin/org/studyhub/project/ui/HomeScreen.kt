@@ -55,6 +55,7 @@ import org.studyhub.project.net.GamificationProgress
 import org.studyhub.project.net.RiskLevel
 import org.studyhub.project.net.UpcomingClass
 import org.studyhub.project.net.platformCurrentTimeHM
+import org.studyhub.project.net.platformTodayDayOfWeek
 import org.studyhub.project.ui.icons.AppIcon
 import kotlin.math.roundToInt
 
@@ -658,12 +659,8 @@ private fun timeOf(iso: String): String {
     return t.split(":").take(2).joinToString(":")
 }
 
-/** dayOfWeek del backend (0=Domingo … 6=Sábado) para hoy. */
-internal fun todayDayOfWeek(): Int {
-    val today = kotlin.time.Clock.System.now().toEpochMilliseconds() / 86_400_000L
-    // 1970-01-01 (día epoch 0) fue jueves → dayOfWeek 4 en la convención 0=Domingo
-    return (((today + 4) % 7) + 7).toInt() % 7
-}
+/** dayOfWeek del backend (0=Domingo … 6=Sábado) para hoy, usando hora LOCAL. */
+internal fun todayDayOfWeek(): Int = platformTodayDayOfWeek()
 
 /** "En curso", "Terminó" o null según la hora actual local. */
 internal fun classStatus(startTime: String, endTime: String): String? {
